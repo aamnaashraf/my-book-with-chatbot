@@ -40,11 +40,9 @@ jobs:
             libvips-dev
 
       - name: Install dependencies
-        working-directory: book-source
         run: npm ci
 
       - name: Run type checking
-        working-directory: book-source
         run: npm run typecheck
         
       - name: Build Docusaurus site
