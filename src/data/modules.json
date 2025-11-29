@@ -1,0 +1,50 @@
+[
+  {
+    "id": "module-1-ros2",
+    "title": "Module 1: The Robotic Nervous System (ROS 2)",
+    "weekRange": "Weeks 3-5",
+    "description": "Master ROS 2 architecture, communication patterns, and robot modeling. Learn to build distributed robotic systems using nodes, topics, services, and actions.",
+    "learningOutcomes": [
+      "Explain the ROS 2 computation graph and its components",
+      "Create publishers, subscribers, and service clients using rclpy",
+      "Define robot structure using URDF and visualize in RViz2",
+      "Launch multi-node systems and debug distributed applications"
+    ]
+  },
+  {
+    "id": "module-2-digital-twin",
+    "title": "Module 2: Digital Twins - Simulation & Sensors",
+    "weekRange": "Weeks 6-7",
+    "description": "Build digital twins for robotic systems using Gazebo and Unity. Simulate sensors, physics, and environments for testing before deploying to physical hardware.",
+    "learningOutcomes": [
+      "Create Gazebo simulation environments with physics and sensors",
+      "Integrate Unity for photorealistic sensor simulation",
+      "Test navigation and perception algorithms in simulation",
+      "Bridge simulated and real robot workflows"
+    ]
+  },
+  {
+    "id": "module-3-isaac",
+    "title": "Module 3: NVIDIA Isaac - Perception & Navigation",
+    "weekRange": "Weeks 8-10",
+    "description": "Leverage NVIDIA Isaac Sim for GPU-accelerated robotics. Implement VSLAM, Nav2 navigation stacks, and reinforcement learning for autonomous behaviors.",
+    "learningOutcomes": [
+      "Set up and configure NVIDIA Isaac Sim environments",
+      "Implement Visual SLAM for robot localization",
+      "Deploy Nav2 navigation stack for autonomous navigation",
+      "Train reinforcement learning policies in Isaac Gym"
+    ]
+  },
+  {
+    "id": "module-4-vla-humanoids",
+    "title": "Module 4: VLA & Humanoid Robotics",
+    "weekRange": "Weeks 11-13",
+    "description": "Integrate Vision-Language-Action models with humanoid robots. Master humanoid kinematics, manipulation, and conversational AI for natural human-robot interaction.",
+    "learningOutcomes": [
+      "Calculate forward and inverse kinematics for humanoid robots",
+      "Implement manipulation primitives for pick-and-place tasks",
+      "Integrate conversational AI with robot action planning",
+      "Deploy end-to-end VLA systems for voice-driven robotics"
+    ]
+  }
+]

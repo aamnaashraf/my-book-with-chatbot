@@ -1,0 +1,108 @@
+---
+title: "Module 1: The Robotic Nervous System (ROS 2)"
+description: Master ROS 2 architecture, communication patterns, and robot modeling to build distributed robotic systems
+keywords: [ROS 2, robotics middleware, nodes, topics, services, URDF, rclpy]
+sidebar_position: 1
+sidebar_label: "Module 1: ROS 2"
+estimated_time: 10
+week: 3
+module: 1
+prerequisites: ["intro"]
+learning_objectives:
+  - Explain the ROS 2 computation graph and its components (nodes, topics, services, actions)
+  - Create publishers, subscribers, and service clients using rclpy
+  - Define robot structure using URDF and visualize in RViz2
+  - Launch multi-node systems and debug distributed applications
+  - Build a complete ROS 2 package with proper package structure
+---
+
+# Module 1: The Robotic Nervous System (ROS 2)
+
+**Duration**: Weeks 3-5 | **Estimated Time**: 10 hours
+**Prerequisites**: [Introduction](../intro.md), Python programming
+
+---
+
+## Module Overview
+
+ROS 2 (Robot Operating System 2) is the middleware framework that serves as the "nervous system" for modern robots. Just as your nervous system coordinates communication between your brain, sensors (eyes, ears), and muscles, ROS 2 coordinates communication between:
+
+- **Perception nodes**: Processing camera and sensor data
+- **Planning nodes**: Making decisions about robot actions
+- **Control nodes**: Executing movements through motors
+
+This module will teach you to architect distributed robotic systems that can scale from a single computer to fleets of robots communicating over networks.
+
+## Why ROS 2?
+
+- **Industry Standard**: Used by companies like BMW, Bosch, NASA, and robotics startups worldwide
+- **Distributed Architecture**: Nodes can run on different machines, enabling cloud robotics
+- **Language Agnostic**: Write nodes in Python, C++, or other supported languages
+- **Rich Ecosystem**: Thousands of packages for navigation, perception, manipulation, and simulation
+- **Real-Time Capable**: DDS middleware enables real-time communication for safety-critical systems
+
+## Module Structure
+
+### Week 3: ROS 2 Architecture & Core Concepts
+- The ROS 2 computation graph (nodes, topics, services, actions)
+- Creating your first node with rclpy
+- Publishers and subscribers for sensor data streaming
+- Quality of Service (QoS) settings for reliable communication
+
+### Week 4: Communication Patterns & Services
+- Synchronous communication with services (request/response)
+- Asynchronous actions for long-running tasks
+- Parameter servers for runtime configuration
+- Introspection tools: `ros2 node`, `ros2 topic`, `ros2 service`
+
+### Week 5: Robot Modeling & Visualization
+- URDF (Unified Robot Description Format) for robot structure
+- Xacro for parameterized robot models
+- RViz2 for 3D visualization and debugging
+- Transform trees (TF2) for coordinate frame management
+
+## Learning Outcomes
+
+By the end of this module, you will be able to:
+
+✅ **Architect distributed systems**: Design multi-node ROS 2 applications with clear separation of concerns
+✅ **Implement communication patterns**: Use topics for streaming data and services for request/response
+✅ **Model robots in URDF**: Define robot geometry, joints, and sensors in a standardized format
+✅ **Debug robotic systems**: Use ROS 2 tools to inspect running nodes, visualize data, and troubleshoot issues
+✅ **Build production packages**: Structure ROS 2 packages with proper dependencies and launch files
+
+## Capstone Integration
+
+**How this module contributes to your autonomous humanoid project:**
+
+The ROS 2 skills you learn here will be the foundation for all future modules. Your capstone project's architecture will use:
+
+- **Voice node** (Module 4): Listens for voice commands → publishes to `/voice_command` topic
+- **Planning node** (Module 4): Subscribes to commands → publishes to `/task_plan` topic
+- **Navigation node** (Module 3): Subscribes to plan → publishes to `/nav_goal` action
+- **Perception node** (Module 3): Publishes to `/detected_objects` topic
+- **Manipulation node** (Module 4): Subscribes to objects → executes grasping actions
+
+Without mastering ROS 2 communication, you cannot build the distributed autonomous system required for the capstone.
+
+## Time Commitment
+
+- **Lectures & Reading**: 3 hours/week
+- **Hands-On Exercises**: 4 hours/week
+- **ROS 2 Package Project**: 12 hours (Week 5)
+- **Total**: ~30 hours across 3 weeks
+
+## Assessment
+
+**ROS 2 Package Project** (Week 5):
+Build a multi-node system that demonstrates publishers, subscribers, services, and URDF robot modeling. Detailed rubric coming soon.
+
+## Next Steps
+
+1. **Review Prerequisites**: Ensure Python and Ubuntu/WSL2 are installed
+2. **Setup ROS 2**: Follow the [Workstation Setup Guide](../setup/workstation.md)
+3. **Start Week 3**: ROS 2 Architecture & Core Concepts *(Coming Soon)*
+
+---
+
+**Questions?** Check the [Glossary](../references/glossary.md) for ROS 2 terminology or consult course forums.

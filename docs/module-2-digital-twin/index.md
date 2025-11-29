@@ -1,0 +1,119 @@
+---
+title: "Module 2: Digital Twins - Simulation & Sensors"
+description: Build digital twins for robotic systems using Gazebo and Unity to simulate sensors, physics, and environments
+keywords: [Gazebo, Unity, digital twin, simulation, sensors, physics, robotics simulation]
+sidebar_position: 1
+sidebar_label: "Module 2: Digital Twin"
+estimated_time: 6
+week: 6
+module: 2
+prerequisites: ["module-1-ros2/index"]
+learning_objectives:
+  - Create Gazebo simulation environments with physics engines and sensor models
+  - Integrate Unity for photorealistic sensor simulation using Unity Robotics Hub
+  - Test navigation and perception algorithms in simulation before hardware deployment
+  - Bridge simulated and real robot workflows for seamless sim-to-real transfer
+---
+
+# Module 2: Digital Twins - Simulation & Sensors
+
+**Duration**: Weeks 6-7 | **Estimated Time**: 6 hours
+**Prerequisites**: [Module 1: ROS 2](../module-1-ros2/index.md)
+
+---
+
+## Module Overview
+
+A **digital twin** is a virtual replica of a physical robot that mirrors its behavior, sensors, and environment. Before deploying expensive hardware or risking safety issues, digital twins enable you to:
+
+- **Test algorithms** in realistic simulated environments
+- **Train machine learning models** with synthetic data
+- **Debug complex behaviors** without physical hardware
+- **Validate designs** before manufacturing
+
+This module teaches you to build digital twins using two powerful simulation platforms:
+- **Gazebo**: Open-source physics simulator with ROS 2 integration
+- **Unity**: Game engine for photorealistic sensor simulation
+
+## Why Digital Twins?
+
+- **Cost-Effective**: Test ideas without buying hardware
+- **Safe**: No risk of damaging robots or harming people
+- **Scalable**: Run thousands of simulations in parallel
+- **Reproducible**: Exact conditions for debugging and research
+- **Faster Iteration**: Changes take seconds, not hours
+
+## Module Structure
+
+### Week 6: Gazebo Simulation
+- Setting up Gazebo with ROS 2 integration
+- Creating world files with physics properties
+- Adding sensors (cameras, LiDAR, IMU, force/torque)
+- Spawning robots and controlling them via ROS 2 topics
+- Debugging simulation vs. reality gaps
+
+### Week 7: Unity for Photorealistic Simulation
+- Unity Robotics Hub setup and ROS-TCP connector
+- Importing robot models (URDF to Unity)
+- Photorealistic camera simulation with ray tracing
+- Sensor fusion (RGB-D cameras, semantic segmentation)
+- Comparing Gazebo vs. Unity for different use cases
+
+## Learning Outcomes
+
+By the end of this module, you will be able to:
+
+✅ **Build Gazebo worlds**: Create custom environments with terrain, obstacles, and lighting
+✅ **Simulate sensors**: Configure cameras, LiDAR, and IMUs with realistic noise models
+✅ **Bridge sim-to-real**: Transfer algorithms from simulation to physical robots
+✅ **Choose the right tool**: Understand when to use Gazebo vs. Unity vs. Isaac Sim
+✅ **Generate synthetic data**: Create labeled datasets for machine learning
+
+## Capstone Integration
+
+**How this module contributes to your autonomous humanoid project:**
+
+Your capstone's **Navigation** component will be tested first in simulation:
+
+1. **Gazebo** will simulate the humanoid walking through an office environment
+2. **Unity** will provide photorealistic camera feeds for object detection testing
+3. **Sim-to-real transfer** will validate that navigation works on physical hardware
+
+Without digital twin skills, testing navigation would require expensive hardware and be time-consuming. Simulation enables rapid prototyping of navigation strategies.
+
+## Time Commitment
+
+- **Lectures & Reading**: 2 hours/week
+- **Hands-On Exercises**: 2 hours/week
+- **Gazebo Simulation Project**: 8 hours (Week 7)
+- **Total**: ~16 hours across 2 weeks
+
+## Assessment
+
+**Gazebo Simulation Project** (Week 7):
+Create a simulated environment with a robot navigating obstacles using sensor data. Detailed rubric coming soon.
+
+## Gazebo vs. Unity vs. Isaac Sim
+
+| Feature | Gazebo | Unity | Isaac Sim |
+|---------|--------|-------|-----------|
+| **Physics** | ODE, Bullet, Dart | PhysX | PhysX (GPU-accelerated) |
+| **ROS Integration** | Native | ROS-TCP Connector | Native ROS 2 |
+| **Graphics** | Basic | Photorealistic | Photorealistic + RTX |
+| **Best For** | Rapid prototyping | Synthetic data generation | Large-scale RL training |
+| **License** | Open-source | Free (personal) | Free (with NVIDIA GPU) |
+
+**Module 3** will introduce Isaac Sim, which combines the best of both worlds for GPU-accelerated robotics.
+
+## Next Steps
+
+1. **Complete Module 1**: Ensure you understand ROS 2 publishers/subscribers
+2. **Install Gazebo**: Follow setup guide for Gazebo 11 or Gazebo Fortress
+3. **Start Week 6**: Gazebo Simulation Fundamentals *(Coming Soon)*
+
+---
+
+**Questions?** Check the [Glossary](../references/glossary.md) for simulation terminology or consult course forums.
+
+**Previous Module**: [Module 1: ROS 2](../module-1-ros2/index.md)
+**Next Module**: [Module 3: NVIDIA Isaac](../module-3-isaac/index.md)

@@ -1,0 +1,203 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+/* You can override the default Infima variables here. */
+:root {
+  --ifm-color-primary: #2e8555;
+  --ifm-color-primary-dark: #29784c;
+  --ifm-color-primary-darker: #277148;
+  --ifm-color-primary-darkest: #205d3b;
+  --ifm-color-primary-light: #33925d;
+  --ifm-color-primary-lighter: #359962;
+  --ifm-color-primary-lightest: #3cad6e;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+}
+
+/* For readability purposes, you should choose a lighter palette in dark mode. */
+[data-theme='dark'] {
+  --ifm-color-primary: #25c2a0;
+  --ifm-color-primary-dark: #21af90;
+  --ifm-color-primary-darker: #1fa588;
+  --ifm-color-primary-darkest: #1a8870;
+  --ifm-color-primary-light: #29d5b0;
+  --ifm-color-primary-lighter: #32d8b4;
+  --ifm-color-primary-lightest: #4fddbf;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+
+/* Custom styles for module cards on homepage */
+.module-card {
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  transition: all 0.3s ease;
+  height: 100%;
+}
+
+.module-card:hover {
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.module-card h3 {
+  margin-top: 0;
+  color: var(--ifm-color-primary);
+}
+
+.module-card .week-range {
+  font-size: 0.875rem;
+  color: var(--ifm-color-emphasis-700);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.module-card .description {
+  margin-bottom: 1rem;
+  color: var(--ifm-color-emphasis-800);
+}
+
+.module-card .learning-outcomes {
+  font-size: 0.875rem;
+}
+
+.module-card .learning-outcomes ul {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+/* Homepage dashboard layout */
+.homepage-container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.module-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.quick-links-sidebar {
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  background-color: var(--ifm-background-surface-color);
+}
+
+.quick-links-sidebar h3 {
+  margin-top: 0;
+  font-size: 1.25rem;
+}
+
+.quick-links-sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.quick-links-sidebar li {
+  margin-bottom: 0.75rem;
+}
+
+.quick-links-sidebar a {
+  text-decoration: none;
+  color: var(--ifm-color-primary);
+  font-weight: 500;
+}
+
+.quick-links-sidebar a:hover {
+  text-decoration: underline;
+}
+
+/* Recent updates section */
+.recent-updates {
+  margin-top: 2rem;
+}
+
+.recent-updates h3 {
+  margin-bottom: 1rem;
+}
+
+.update-item {
+  padding: 1rem;
+  border-left: 3px solid var(--ifm-color-primary);
+  margin-bottom: 1rem;
+  background-color: var(--ifm-background-surface-color);
+}
+
+.update-item .date {
+  font-size: 0.875rem;
+  color: var(--ifm-color-emphasis-600);
+  margin-bottom: 0.25rem;
+}
+
+.update-item .title {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 996px) {
+  .homepage-container {
+    grid-template-columns: 1fr;
+  }
+
+  .module-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Glossary search component */
+.glossary-search {
+  margin-bottom: 2rem;
+}
+
+.glossary-search input {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 4px;
+  background-color: var(--ifm-background-color);
+  color: var(--ifm-color-content);
+}
+
+.glossary-search input:focus {
+  outline: none;
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 0 0 2px rgba(46, 133, 85, 0.1);
+}
+
+.glossary-results {
+  margin-top: 1rem;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.glossary-result-item {
+  padding: 0.75rem;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  cursor: pointer;
+}
+
+.glossary-result-item:hover {
+  background-color: var(--ifm-background-surface-color);
+}
+
+.glossary-result-term {
+  font-weight: 600;
+  color: var(--ifm-color-primary);
+  margin-bottom: 0.25rem;
+}
+
+.glossary-result-definition {
+  font-size: 0.875rem;
+  color: var(--ifm-color-emphasis-700);
+}

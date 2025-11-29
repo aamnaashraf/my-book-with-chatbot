@@ -1,0 +1,103 @@
+---
+title: Introduction to Physical AI & Humanoid Robotics
+description: Welcome to the comprehensive 13-week course for industry practitioners. Learn to build intelligent robotic systems that perceive, plan, and interact with the physical world.
+keywords: [physical AI, humanoid robotics, ROS 2, Isaac Sim, VLA, course introduction]
+sidebar_position: 1
+---
+
+# Introduction to Physical AI & Humanoid Robotics
+
+Welcome to the **Physical AI & Humanoid Robotics** textbook - a comprehensive 13-week course designed for industry practitioners with programming experience.
+
+## What is Physical AI?
+
+**Physical AI** refers to artificial intelligence systems that interact with and manipulate the physical world. Unlike traditional AI that operates purely in digital spaces, Physical AI combines:
+
+- **Perception**: Understanding the environment through sensors (cameras, LiDAR, force sensors)
+- **Planning**: Reasoning about actions and their consequences in physical space
+- **Action**: Executing precise movements through actuators and motors
+- **Learning**: Adapting behavior based on physical interactions
+
+## Course Overview
+
+This 13-week journey will take you from ROS 2 fundamentals to deploying autonomous humanoid robots capable of voice-driven manipulation tasks.
+
+### Weeks 1-2: Foundations
+- Introduction to Physical AI concepts
+- Hardware setup (3 paths: Workstation, Edge Kit, Cloud)
+- Development environment configuration
+
+### Module 1: The Robotic Nervous System (Weeks 3-5)
+Learn **ROS 2** - the middleware that enables distributed robotic systems. Master nodes, topics, services, and URDF robot models.
+
+### Module 2: Digital Twins (Weeks 6-7)
+Build simulation environments using **Gazebo** and **Unity**. Test algorithms safely before deploying to physical hardware.
+
+### Module 3: NVIDIA Isaac (Weeks 8-10)
+Leverage **Isaac Sim** for GPU-accelerated robotics. Implement VSLAM, Nav2 navigation, and reinforcement learning.
+
+### Module 4: VLA & Humanoids (Weeks 11-13)
+Integrate **Vision-Language-Action models** with humanoid robots. Master kinematics, manipulation, and conversational AI.
+
+### Week 13: Capstone Project
+Build an autonomous humanoid system with the complete pipeline:
+**Voice Input → Plan → Navigate → Perceive → Manipulate**
+
+## Who This Course Is For
+
+- **Industry practitioners** looking to transition into robotics
+- **Software engineers** with Python experience
+- **Researchers** wanting hands-on robotics skills
+- **Hobbyists** committed to a structured learning path
+
+### Prerequisites
+- Proficiency in **Python** programming
+- Comfort with Linux/Ubuntu command line
+- Basic understanding of linear algebra (vectors, matrices)
+- 10-12 hours per week for 13 weeks
+
+## Learning Approach
+
+Each chapter follows a consistent structure:
+
+1. **Learning Objectives**: What you'll be able to do after this chapter
+2. **Prerequisites**: Required prior knowledge
+3. **Content**: Concepts, examples, and explanations
+4. **Hands-On Exercises**: Apply what you've learned
+5. **Summary**: Key takeaways
+6. **References**: Further reading and resources
+
+## Getting Started
+
+1. **Choose your hardware path**: [Workstation](./setup/workstation.md), [Edge Kit](./setup/edge-kit.md), or [Cloud](./setup/cloud.md)
+2. **Review the glossary**: [Glossary](./references/glossary.md) for robotics terminology
+3. **Start Module 1**: [ROS 2 Architecture](./module-1-ros2/index.md)
+
+## Assessment Structure
+
+Your learning will be validated through:
+
+- **ROS 2 Package Project** (Week 5): Build a multi-node robotic system
+- **Gazebo Simulation** (Week 7): Create a simulated environment
+- **Isaac Perception Pipeline** (Week 10): Implement VSLAM and navigation
+- **Capstone Project** (Week 13): End-to-end autonomous humanoid system
+
+Each assessment includes detailed rubrics with three evaluation levels: Needs Improvement, Proficient, and Excellent.
+
+## Support and Resources
+
+- **Glossary**: [Robotics Terminology](./references/glossary.md) for quick term lookup
+- **Setup Guides**: [Workstation](./setup/workstation.md), [Edge Kit](./setup/edge-kit.md), [Cloud](./setup/cloud.md)
+
+---
+
+**Ready to begin?** Choose your hardware setup path and start your Physical AI journey!
+
+<div style={{marginTop: '2rem'}}>
+  <a href="./setup/workstation" className="button button--primary button--lg" style={{marginRight: '1rem'}}>
+    Workstation Setup →
+  </a>
+  <a href="./module-1-ros2/" className="button button--secondary button--lg">
+    Jump to Module 1 →
+  </a>
+</div>

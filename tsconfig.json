@@ -1,0 +1,25 @@
+{
+  "extends": "@docusaurus/tsconfig",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "paths": {
+      "@site/*": ["./*"],
+      "@components/*": ["./src/components/*"],
+      "@theme/*": ["./src/theme/*"]
+    }
+  },
+  "include": ["src/**/*", "*.config.js", "*.config.ts"],
+  "exclude": ["node_modules", "build", ".docusaurus"]
+}

@@ -1,0 +1,144 @@
+---
+title: "Module 3: NVIDIA Isaac - Perception & Navigation"
+description: Leverage NVIDIA Isaac Sim for GPU-accelerated robotics with VSLAM, Nav2 navigation, and reinforcement learning
+keywords: [NVIDIA Isaac, Isaac Sim, VSLAM, Nav2, reinforcement learning, GPU robotics, perception]
+sidebar_position: 1
+sidebar_label: "Module 3: Isaac Sim"
+estimated_time: 9
+week: 8
+module: 3
+prerequisites: ["module-2-digital-twin/index"]
+learning_objectives:
+  - Set up and configure NVIDIA Isaac Sim environments with RTX-accelerated rendering
+  - Implement Visual SLAM (VSLAM) for robot localization and mapping
+  - Deploy Nav2 navigation stack for autonomous navigation with dynamic obstacles
+  - Train reinforcement learning policies using Isaac Gym for manipulation tasks
+---
+
+# Module 3: NVIDIA Isaac - Perception & Navigation
+
+**Duration**: Weeks 8-10 | **Estimated Time**: 9 hours
+**Prerequisites**: [Module 2: Digital Twin](../module-2-digital-twin/index.md), RTX GPU
+
+---
+
+## Module Overview
+
+**NVIDIA Isaac Sim** is a GPU-accelerated robotics simulator built on NVIDIA Omniverse. It combines:
+
+- **Photorealistic rendering**: RTX ray tracing for synthetic sensor data
+- **Physics simulation**: PhysX 5 with GPU acceleration for massive parallelism
+- **ROS 2 integration**: Native bridges for seamless ROS 2 workflows
+- **Reinforcement learning**: Isaac Gym for training thousands of agents in parallel
+
+This module focuses on two critical robotic capabilities:
+1. **Perception**: Using cameras and sensors to understand the environment (VSLAM)
+2. **Navigation**: Planning paths and avoiding obstacles (Nav2 stack)
+
+## Why Isaac Sim?
+
+Compared to Gazebo and Unity (Module 2), Isaac Sim offers:
+
+| Capability | Advantage |
+|------------|-----------|
+| **GPU Acceleration** | 10-100x faster than CPU-based simulation |
+| **Synthetic Data** | Generate millions of labeled images for ML training |
+| **Massive Parallelism** | Train RL policies with 10,000+ parallel environments |
+| **RTX Rendering** | Photorealistic sensors for sim-to-real transfer |
+| **Domain Randomization** | Automatic variation for robust real-world deployment |
+
+## Module Structure
+
+### Week 8: Isaac Sim Setup & Environment
+- Installing Isaac Sim and system requirements (RTX GPU, Ubuntu 22.04)
+- Creating photorealistic environments with assets from Omniverse
+- Importing robot URDF models and configuring sensors
+- ROS 2 bridge setup for publishing camera and LiDAR data
+- Performance optimization (LOD, culling, ray tracing settings)
+
+### Week 9: Visual SLAM & ROS 2 Navigation
+- Implementing Visual SLAM (ORB-SLAM3, RTAB-Map) for localization
+- Building occupancy grid maps from sensor data
+- Integrating Nav2 stack for path planning
+- Configuring costmaps and recovery behaviors
+- Testing dynamic obstacle avoidance
+
+### Week 10: Reinforcement Learning with Isaac Gym
+- Introduction to Isaac Gym for massively parallel RL
+- Training robotic grasping policies (pick-and-place)
+- Domain randomization for sim-to-real transfer
+- Deploying trained policies to Isaac Sim robots
+- Comparing RL vs. classical planning approaches
+
+## Learning Outcomes
+
+By the end of this module, you will be able to:
+
+✅ **Set up Isaac Sim**: Install and configure with ROS 2 integration
+✅ **Implement VSLAM**: Localize robots using visual odometry and loop closure
+✅ **Deploy Nav2**: Plan collision-free paths in dynamic environments
+✅ **Train RL policies**: Use Isaac Gym for parallel reinforcement learning
+✅ **Optimize performance**: Tune rendering and physics for real-time simulation
+
+## Capstone Integration
+
+**How this module contributes to your autonomous humanoid project:**
+
+This is where your capstone comes to life. Module 3 provides the core autonomous capabilities:
+
+1. **Perception** (VSLAM): The humanoid will localize itself in an office environment
+2. **Navigation** (Nav2): Plan paths from current location to target objects
+3. **Reinforcement Learning**: Train grasping policies for manipulation
+
+Your final system will use:
+- **Isaac Sim VSLAM** → Publishes to `/map` and `/robot_pose` topics
+- **Nav2 Stack** → Subscribes to planning requests, publishes to `/cmd_vel`
+- **RL Grasping Policy** → Trained in Isaac Gym, deployed for object manipulation
+
+Without these perception and navigation skills, the humanoid cannot autonomously navigate or manipulate objects.
+
+## Time Commitment
+
+- **Lectures & Reading**: 2 hours/week
+- **Hands-On Exercises**: 3 hours/week
+- **Isaac Perception Project**: 12 hours (Week 10)
+- **Total**: ~27 hours across 3 weeks
+
+## Assessment
+
+**Isaac Perception Pipeline Project** (Week 10):
+Implement VSLAM + Nav2 for autonomous navigation in a simulated office environment. Detailed rubric coming soon.
+
+## Hardware Requirements
+
+Isaac Sim requires:
+- **GPU**: NVIDIA RTX 2060 or better (RTX 3080+ recommended)
+- **RAM**: 32GB minimum (64GB for large environments)
+- **OS**: Ubuntu 20.04/22.04 or Windows 10/11
+- **Storage**: 50GB for Isaac Sim + assets
+
+**Don't have an RTX GPU?** Use the [Cloud Setup Guide](../setup/cloud.md) for AWS/Azure options.
+
+## Isaac Sim vs. Gazebo vs. Unity
+
+| Use Case | Best Tool |
+|----------|-----------|
+| Quick prototyping | Gazebo |
+| Synthetic data generation | Unity or Isaac Sim |
+| Reinforcement learning | Isaac Sim (Isaac Gym) |
+| Large-scale parallelism | Isaac Sim |
+| Open-source requirements | Gazebo |
+
+## Next Steps
+
+1. **Complete Module 2**: Ensure you understand Gazebo simulation basics
+2. **Verify Hardware**: Check RTX GPU requirements or setup cloud instance
+3. **Install Isaac Sim**: Follow [Workstation Setup](../setup/workstation.md)
+4. **Start Week 8**: Isaac Sim Environment Setup *(Coming Soon)*
+
+---
+
+**Questions?** Check the [Glossary](../references/glossary.md) for Isaac Sim terminology or consult NVIDIA forums.
+
+**Previous Module**: [Module 2: Digital Twin](../module-2-digital-twin/index.md)
+**Next Module**: [Module 4: VLA & Humanoids](../module-4-vla-humanoids/index.md)

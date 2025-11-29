@@ -1,0 +1,166 @@
+---
+title: "Module 4: VLA & Humanoid Robotics"
+description: Integrate Vision-Language-Action models with humanoid robots for natural human-robot interaction and manipulation
+keywords: [VLA, vision language action, humanoid robotics, kinematics, manipulation, conversational AI, embodied AI]
+sidebar_position: 1
+sidebar_label: "Module 4: VLA & Humanoids"
+estimated_time: 9
+week: 11
+module: 4
+prerequisites: ["module-3-isaac/index"]
+learning_objectives:
+  - Calculate forward and inverse kinematics for humanoid robots with 30+ degrees of freedom
+  - Implement manipulation primitives (reach, grasp, place) for pick-and-place tasks
+  - Integrate conversational AI (speech-to-text, LLMs) with robot action planning
+  - Deploy end-to-end VLA systems that translate voice commands into physical actions
+---
+
+# Module 4: VLA & Humanoid Robotics
+
+**Duration**: Weeks 11-13 | **Estimated Time**: 9 hours
+**Prerequisites**: [Module 3: Isaac Sim](../module-3-isaac/index.md)
+
+---
+
+## Module Overview
+
+**Vision-Language-Action (VLA) models** represent the cutting edge of embodied AI - systems that can:
+
+1. **See**: Process visual information from cameras
+2. **Understand**: Interpret natural language commands
+3. **Act**: Execute physical actions in the real world
+
+This module brings together everything you've learned:
+- **ROS 2** (Module 1): Communication between VLA components
+- **Simulation** (Module 2): Test humanoid behaviors safely
+- **Perception & Navigation** (Module 3): Locate objects and plan paths
+- **Humanoid Control** (Module 4): Execute manipulation tasks
+
+## What are VLA Models?
+
+Traditional robots require explicit programming for each task. VLA models learn from demonstration and can generalize to new scenarios:
+
+**Traditional Approach**:
+```
+IF user says "pick up red cup" THEN:
+  1. Detect red cup (hard-coded vision)
+  2. Calculate grasp pose (hard-coded IK)
+  3. Execute trajectory (pre-programmed)
+```
+
+**VLA Approach**:
+```
+User: "Can you hand me the red cup?"
+VLA Model: [observes scene] → [plans actions] → [executes manipulation]
+  - Understands "hand me" implies grasp + bring
+  - Recognizes "red cup" from visual observation
+  - Generates manipulation trajectory end-to-end
+```
+
+## Module Structure
+
+### Week 11: Humanoid Kinematics & Control
+- Forward kinematics for multi-DOF humanoid robots
+- Inverse kinematics using analytical and numerical methods
+- Jacobian-based velocity control for smooth motions
+- Whole-body control for maintaining balance during manipulation
+- ROS 2 control interfaces (ros2_control, MoveIt 2)
+
+### Week 12: Manipulation Primitives
+- Grasp planning and force closure analysis
+- Pick-and-place pipeline (approach → grasp → lift → transport → place)
+- Collision avoidance during manipulation
+- Reactive behaviors (compliant control, force feedback)
+- Integrating manipulation with navigation (mobile manipulation)
+
+### Week 13: Conversational VLA Integration
+- Speech-to-text for voice command recognition
+- Large Language Models (LLMs) for intent understanding
+- Grounding language in robot actions (task planning)
+- Vision-language models for object recognition
+- End-to-end VLA deployment (voice → plan → act)
+
+## Learning Outcomes
+
+By the end of this module, you will be able to:
+
+✅ **Solve humanoid kinematics**: Compute joint angles for desired end-effector poses
+✅ **Implement manipulation**: Build robust pick-and-place systems
+✅ **Integrate conversational AI**: Connect voice commands to robot actions
+✅ **Deploy VLA systems**: Create end-to-end embodied AI applications
+✅ **Understand trade-offs**: Compare learned VLA models vs. classical planning
+
+## Capstone Integration
+
+**This module IS your capstone!** Everything culminates in Week 13:
+
+Your **Autonomous Humanoid System** will execute this pipeline:
+
+```
+Voice Input: "Please bring me the blue bottle from the table"
+    ↓
+[Speech-to-Text] → Transcription
+    ↓
+[LLM Task Planner] → Subtasks: navigate → locate → grasp → bring
+    ↓
+[Navigation] (Module 3) → Move to table
+    ↓
+[Perception] (Module 3) → Detect blue bottle via VSLAM
+    ↓
+[Manipulation] (Module 4) → IK + grasp planning → pick up bottle
+    ↓
+[Navigation] (Module 3) → Return to user
+    ↓
+[Manipulation] (Module 4) → Hand over bottle
+```
+
+This integration demonstrates how all course modules work together to build an autonomous humanoid system. Capstone project guide coming soon.
+
+## Time Commitment
+
+- **Lectures & Reading**: 2 hours/week
+- **Hands-On Exercises**: 3 hours/week
+- **Capstone Project**: 25 hours (Week 13)
+- **Total**: ~40 hours across 3 weeks
+
+## Assessment
+
+**Capstone Project** (Week 13):
+Build the complete autonomous humanoid system with voice-driven manipulation. This is the culminating assessment that demonstrates all course learning outcomes. Detailed rubric coming soon.
+
+## VLA Model Architectures
+
+Current state-of-the-art VLA models include:
+
+- **RT-2** (Google): Vision-language-action model trained on web data + robotics
+- **PaLM-E** (Google): Multimodal LLM grounded in embodied sensor data
+- **Octo** (UC Berkeley): Open-source generalist robot policy
+- **Mobile ALOHA** (Stanford): Bimanual manipulation with VLA integration
+
+You'll learn to:
+1. Use pre-trained VLA models (RT-2, Octo) for zero-shot generalization
+2. Fine-tune models on custom manipulation tasks
+3. Integrate VLA outputs with classical planners (hybrid approach)
+
+## Humanoid Platforms
+
+This course is **hardware-agnostic**, but examples use common platforms:
+
+- **Simulation**: Humanoid models in Isaac Sim (no physical hardware required)
+- **Physical Options** (optional):
+  - **Unitree H1**: 35 DOF research humanoid
+  - **TIAGo**: Mobile manipulator (if full humanoid unavailable)
+  - **Custom Humanoid**: Any ROS 2-compatible platform
+
+## Next Steps
+
+1. **Complete Module 3**: Ensure you understand VSLAM and Nav2
+2. **Review Linear Algebra**: Brush up on rotation matrices, homogeneous transforms
+3. **Install MoveIt 2**: Follow [Workstation Setup](../setup/workstation.md)
+4. **Start Week 11**: Humanoid Kinematics *(Coming Soon)*
+
+---
+
+**Questions?** Check the [Glossary](../references/glossary.md) for VLA and humanoid terminology or consult course forums.
+
+**Previous Module**: [Module 3: Isaac Sim](../module-3-isaac/index.md)

@@ -1,0 +1,149 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/Ameen-Alam/Physical-AI-Humanoid-Robotics-Textbook/schemas/chapter-metadata.json",
+  "title": "Chapter Metadata Schema",
+  "description": "Validation schema for chapter frontmatter in Docusaurus Markdown files",
+  "type": "object",
+  "required": [
+    "title",
+    "description",
+    "keywords",
+    "sidebar_position",
+    "estimated_time",
+    "week",
+    "learning_objectives"
+  ],
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Chapter title displayed in navigation and page header",
+      "minLength": 5,
+      "maxLength": 100,
+      "examples": ["Week 3: ROS 2 Architecture and Core Concepts"]
+    },
+    "description": {
+      "type": "string",
+      "description": "Brief summary for SEO and page metadata (150-160 characters recommended)",
+      "minLength": 50,
+      "maxLength": 200,
+      "examples": ["Introduction to ROS 2 nodes, topics, services, and the computation graph architecture"]
+    },
+    "keywords": {
+      "type": "array",
+      "description": "SEO keywords and search terms",
+      "items": {
+        "type": "string",
+        "minLength": 2,
+        "maxLength": 30
+      },
+      "minItems": 3,
+      "maxItems": 10,
+      "examples": [["ROS 2", "nodes", "topics", "services", "computation graph", "rclpy"]]
+    },
+    "sidebar_position": {
+      "type": "integer",
+      "description": "Order in the sidebar (within parent category)",
+      "minimum": 0,
+      "examples": [1, 2, 3]
+    },
+    "sidebar_label": {
+      "type": "string",
+      "description": "Optional custom label for sidebar (if different from title)",
+      "minLength": 3,
+      "maxLength": 50,
+      "examples": ["ROS 2 Architecture", "Setup Guide"]
+    },
+    "estimated_time": {
+      "type": "number",
+      "description": "Estimated reading/completion time in hours (fractional allowed)",
+      "minimum": 0.25,
+      "maximum": 10,
+      "examples": [2, 3.5, 1.5]
+    },
+    "week": {
+      "type": "integer",
+      "description": "Course week number (1-13)",
+      "minimum": 1,
+      "maximum": 13,
+      "examples": [3, 5, 11]
+    },
+    "module": {
+      "type": ["integer", "null"],
+      "description": "Module number (1-4) or null for intro/capstone chapters",
+      "minimum": 1,
+      "maximum": 4,
+      "examples": [1, 2, null]
+    },
+    "prerequisites": {
+      "type": "array",
+      "description": "Array of prerequisite chapter paths (relative to docs/)",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9-_/]+$"
+      },
+      "default": [],
+      "examples": [["intro", "setup/workstation", "module-1-ros2/week-3-architecture"]]
+    },
+    "learning_objectives": {
+      "type": "array",
+      "description": "Measurable learning outcomes for this chapter (use action verbs from Bloom's taxonomy)",
+      "items": {
+        "type": "string",
+        "minLength": 20,
+        "maxLength": 150,
+        "pattern": "^(Explain|Create|Implement|Analyze|Evaluate|Design|Debug|Configure|Demonstrate|Compare|Apply)"
+      },
+      "minItems": 2,
+      "maxItems": 6,
+      "examples": [
+        [
+          "Explain the ROS 2 computation graph and node lifecycle",
+          "Create a simple ROS 2 node using rclpy",
+          "Launch multiple nodes and inspect the graph using CLI tools"
+        ]
+      ]
+    },
+    "assessment_type": {
+      "type": ["string", "null"],
+      "description": "Type of assessment associated with this chapter",
+      "enum": ["project", "quiz", "hands-on", "capstone", null],
+      "examples": ["quiz", "hands-on", null]
+    },
+    "difficulty_level": {
+      "type": "string",
+      "description": "Cognitive difficulty level",
+      "enum": ["beginner", "intermediate", "advanced"],
+      "default": "beginner",
+      "examples": ["beginner", "intermediate"]
+    },
+    "capstone_component": {
+      "type": ["string", "null"],
+      "description": "Capstone project component this chapter contributes to",
+      "enum": ["voice", "plan", "navigate", "perceive", "manipulate", null],
+      "default": null,
+      "examples": ["voice", "navigate", null]
+    }
+  },
+  "additionalProperties": false,
+  "examples": [
+    {
+      "title": "Week 3: ROS 2 Architecture and Core Concepts",
+      "description": "Introduction to ROS 2 nodes, topics, services, and the computation graph architecture with hands-on examples using rclpy.",
+      "keywords": ["ROS 2", "nodes", "topics", "services", "computation graph", "rclpy"],
+      "sidebar_position": 1,
+      "sidebar_label": "ROS 2 Architecture",
+      "estimated_time": 3,
+      "week": 3,
+      "module": 1,
+      "prerequisites": ["intro", "setup/workstation"],
+      "learning_objectives": [
+        "Explain the ROS 2 computation graph and node lifecycle",
+        "Create a simple ROS 2 node using rclpy",
+        "Launch multiple nodes and inspect the graph using CLI tools"
+      ],
+      "assessment_type": null,
+      "difficulty_level": "beginner",
+      "capstone_component": null
+    }
+  ]
+}
