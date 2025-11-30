@@ -1,0 +1,49 @@
+---
+title: Test Chapter Template
+description: Test page for validating LearningObjectives and Prerequisites components from feature 002-chapter-template-system
+keywords: [test, components, learning objectives, prerequisites]
+sidebar_position: 999
+learning_objectives:
+  - Understand how to use the LearningObjectives component
+  - Apply the Prerequisites component in chapter files
+  - Validate component rendering and styling
+prerequisites:
+  - docs/intro
+estimated_time: 15
+content_type: tutorial
+difficulty: beginner
+draft: true
+---
+
+import LearningObjectives from '@site/src/components/LearningObjectives';
+import Prerequisites from '@site/src/components/Prerequisites';
+
+<LearningObjectives objectives={frontMatter.learning_objectives} />
+<Prerequisites prereqs={frontMatter.prerequisites} estimatedTime={frontMatter.estimated_time} />
+
+# {frontMatter.title}
+
+This is a test chapter to validate the chapter template system components.
+
+## Component Test Results
+
+If you can see the Learning Objectives and Prerequisites sections above with proper styling, the components are working correctly.
+
+### Expected Behavior
+
+1. **LearningObjectives Component:**
+   - Should display a styled card with "Learning Objectives" heading
+   - Should list all objectives from frontmatter with checkmark icons
+   - Should use primary theme color for border and heading
+
+2. **Prerequisites Component:**
+   - Should display "Before You Begin" heading
+   - Should show estimated time with clock emoji
+   - Should list prerequisites as clickable links
+   - Should use proper formatting and spacing
+
+## Next Steps
+
+After validating these components work:
+- Delete this test file (it's marked as `draft: true`)
+- Proceed to Phase 4: User Story 1 (Chapter Template Creation)
