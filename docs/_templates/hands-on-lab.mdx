@@ -1,0 +1,536 @@
+---
+# ============================================================================
+# HANDS-ON LAB TEMPLATE - Practical Application Exercise
+# ============================================================================
+# Use this template for chapters that are intensive practical exercises
+# integrating multiple skills. Labs emphasize exploration and problem-solving.
+#
+# Best for: Capstone exercises, integration projects, exploratory activities
+# Examples: "Build a Grasping Controller", "Integrate Sensors for Navigation"
+# ============================================================================
+
+# REQUIRED METADATA (Replace ALL values below)
+title: Your Lab Title Here
+description: Brief description (10-160 characters) for SEO and previews
+keywords: [keyword1, keyword2, keyword3, keyword4, keyword5]  # 3-10 keywords
+sidebar_position: 1  # Integer: position in sidebar (1, 2, 3...)
+
+# Learning objectives using Bloom's taxonomy verbs (2-5 objectives)
+# Start each with: Apply, Build, Design, Implement, Integrate, Construct, etc.
+learning_objectives:
+  - Apply [multiple skills] to [complex task]
+  - Build [complete system or component]
+  - Integrate [tool/library] with [environment]
+
+# Prerequisites: paths to required chapters (use "docs/path/to/chapter" format)
+# Labs typically have more prerequisites than other content types
+prerequisites:
+  - docs/module-name/prerequisite-1
+  - docs/module-name/prerequisite-2
+  - docs/module-name/prerequisite-3
+
+# Estimated completion time in minutes (labs are typically longer: 60-180)
+estimated_time: 90
+
+# Content type (DO NOT CHANGE for this template)
+content_type: hands-on-lab
+
+# Difficulty level: beginner | intermediate | advanced (labs are often intermediate/advanced)
+difficulty: intermediate
+
+# OPTIONAL METADATA (Uncomment if needed)
+# tags: [capstone, integration, ros2, isaac-sim]  # For tag-based filtering
+# draft: true  # Hide from production builds during authoring
+# pagination_prev: docs/previous-chapter  # Override default previous link
+# pagination_next: docs/next-chapter      # Override default next link
+---
+
+<!--
+  ============================================================================
+  HANDS-ON LAB STRUCTURE GUIDANCE
+  ============================================================================
+
+  Hands-on labs should follow this structure:
+  1. Learning Objectives & Prerequisites (auto-displayed from frontmatter)
+  2. Lab Overview - Goal, deliverables, and integration scope
+  3. Background - Relevant concepts and tools (brief review)
+  4. Lab Setup - Environment, files, hardware/software requirements
+  5. Implementation Phases - Broken into logical milestones
+  6. Testing and Validation - Comprehensive testing strategies
+  7. Extensions and Challenges - Optional advanced features
+  8. Reflection and Analysis - Questions to deepen understanding
+  9. Key Takeaways and Next Steps
+
+  HANDS-ON LAB BEST PRACTICES:
+  - Define clear deliverables and success criteria
+  - Break complex tasks into phases with checkpoints
+  - Provide starter code/templates but leave room for creativity
+  - Include debugging and troubleshooting sections
+  - Encourage experimentation and alternative approaches
+  - Connect to capstone project requirements
+  - Provide optional challenge problems for advanced learners
+  ============================================================================
+-->
+
+import LearningObjectives from '@site/src/components/LearningObjectives';
+import Prerequisites from '@site/src/components/Prerequisites';
+
+<LearningObjectives objectives={frontMatter.learning_objectives} />
+<Prerequisites prereqs={frontMatter.prerequisites} estimatedTime={frontMatter.estimated_time} />
+
+# {frontMatter.title}
+
+<!-- OVERVIEW: Clear statement of lab goal and what students will build -->
+## Lab Overview
+
+### Objective
+
+In this hands-on lab, you will [comprehensive description of what students will build or achieve]. This lab integrates concepts from [module X, Y, Z] to create [specific deliverable or system].
+
+### Deliverables
+
+By the end of this lab, you will have:
+
+1. **[Deliverable 1]:** [Description of component or artifact]
+2. **[Deliverable 2]:** [Description of functionality or behavior]
+3. **[Deliverable 3]:** [Description of documentation or analysis]
+
+### Success Criteria
+
+Your lab is complete when:
+
+- [ ] [Specific measurable outcome 1]
+- [ ] [Specific measurable outcome 2]
+- [ ] [Specific measurable outcome 3]
+- [ ] [Performance metric or quality standard]
+
+:::tip Capstone Connection
+This lab directly prepares you for [specific capstone project component or milestone]. Skills practiced here include [key competencies].
+:::
+
+<!-- BACKGROUND: Brief review of relevant concepts (not full tutorial) -->
+## Background and Context
+
+This lab builds on the following concepts:
+
+### Concept 1: [Name]
+
+**Brief review:** [1-2 sentence reminder of key points]
+
+**Relevance to this lab:** [How this concept will be applied]
+
+**Reference:** See [link to concept chapter] for detailed explanation.
+
+### Concept 2: [Name]
+
+**Brief review:** [1-2 sentence reminder]
+
+**Relevance:** [Application in this lab]
+
+### Tools and Technologies
+
+You'll work with:
+
+- **[Tool 1]:** [Purpose in this lab] - [Link to documentation]
+- **[Tool 2]:** [Purpose in this lab] - [Link to documentation]
+- **[Library 1]:** [Specific functionality used] - [Link to API docs]
+
+<!-- SETUP: Complete environment and materials preparation -->
+## Lab Setup
+
+### Required Materials
+
+#### Software Requirements
+
+- [Software name] version X.X or higher
+- [Another tool] with [specific plugin or extension]
+- [Programming environment] configured with [requirements]
+
+#### Hardware Requirements
+
+- [Hardware component 1] - [Specifications]
+- [Hardware component 2] - [Connection instructions]
+- [Optional equipment] - [Purpose if included]
+
+#### Starter Files
+
+Download the lab starter pack:
+
+```bash
+# Clone or download starter repository
+git clone https://github.com/course/lab-name-starter.git
+cd lab-name-starter
+```
+
+**Starter pack includes:**
+- `starter_code/`: [Description of provided code]
+- `assets/`: [3D models, configuration files, test data]
+- `docs/`: [API references, specifications]
+- `tests/`: [Unit test templates]
+
+### Environment Setup
+
+1. **Install dependencies:**
+   ```bash
+   cd lab-name-starter
+   pip install -r requirements.txt
+   ```
+
+2. **Configure environment variables:**
+   ```bash
+   export LAB_CONFIG=/path/to/config
+   source setup_environment.sh
+   ```
+
+3. **Verify installation:**
+   ```bash
+   python -m pytest tests/test_environment.py
+   # All tests should pass
+   ```
+
+:::warning Hardware Setup
+If you're using the [physical robot kit], ensure [specific configuration or connection]. Common issues include [typical problem] - see [troubleshooting link].
+:::
+
+<!-- IMPLEMENTATION: Broken into logical phases with milestones -->
+## Implementation
+
+### Phase 1: [Foundational Component]
+
+**Goal:** Build [specific component or establish basic functionality]
+
+**Estimated time:** 20 minutes
+
+#### Step 1.1: [First substep]
+
+Create the [component] that will [purpose]:
+
+```python
+# File: src/component_name.py
+
+class ComponentName:
+    """
+    [Brief description of component responsibility]
+    """
+    def __init__(self, param1, param2):
+        """
+        Initialize [component] with [parameters].
+
+        Args:
+            param1: [Purpose and type]
+            param2: [Purpose and type]
+        """
+        # TODO: Implement initialization
+        pass
+
+    def core_method(self, input_data):
+        """
+        [What this method accomplishes]
+
+        Args:
+            input_data: [Type and format]
+
+        Returns:
+            [Type and meaning]
+        """
+        # TODO: Implement core functionality
+        pass
+```
+
+**Implementation hints:**
+- Consider how [concept] applies here
+- You'll need to handle [specific edge case]
+- Refer to [documentation link] for [specific API]
+
+#### Step 1.2: [Second substep]
+
+**Test your implementation:**
+
+```python
+# File: tests/test_phase1.py
+
+def test_component_initialization():
+    """Verify component initializes correctly."""
+    component = ComponentName(param1=value1, param2=value2)
+    assert component.is_valid()
+    # Add more assertions
+```
+
+Run tests:
+```bash
+python -m pytest tests/test_phase1.py -v
+```
+
+**Expected output:** All tests should pass. If you see [specific error], check [common cause].
+
+:::tip Milestone Checkpoint
+At this point, you should have [specific artifact or capability]. Verify by [specific test or demonstration].
+:::
+
+### Phase 2: [Integration Component]
+
+**Goal:** Integrate [Phase 1 component] with [external system or tool]
+
+**Estimated time:** 30 minutes
+
+#### Step 2.1: [Integration setup]
+
+[Instructions for setting up integration with external system]
+
+```python
+# File: src/integration.py
+
+from component_name import ComponentName
+import external_library
+
+class IntegratedSystem:
+    """
+    Combines [your component] with [external system].
+    """
+    def __init__(self):
+        self.component = ComponentName(...)
+        self.external = external_library.Client(...)
+
+    def integrated_operation(self):
+        """
+        Perform [complex operation] using both systems.
+        """
+        # Get data from external system
+        data = self.external.read()
+
+        # Process with your component
+        result = self.component.core_method(data)
+
+        # Send result back
+        self.external.write(result)
+```
+
+#### Step 2.2: [Testing integration]
+
+**Manual testing:**
+
+1. Start the external system:
+   ```bash
+   [command to launch external system]
+   ```
+
+2. Run your integrated system:
+   ```bash
+   python src/integration.py
+   ```
+
+3. Observe [specific behavior or output]
+
+**Expected behavior:** [Description of correct operation]
+
+:::danger Common Pitfall
+If you see [specific symptom], this usually indicates [problem]. The solution is [fix]. This happens because [explanation].
+:::
+
+### Phase 3: [Advanced Feature or Optimization]
+
+**Goal:** Add [advanced capability] to complete the lab deliverable
+
+**Estimated time:** 40 minutes
+
+#### Step 3.1: [Advanced implementation]
+
+Now implement [sophisticated feature]:
+
+[Provide guidance but leave more room for student problem-solving]
+
+**Requirements:**
+- Must handle [constraint or requirement]
+- Should optimize for [performance metric]
+- Must integrate with Phases 1 and 2
+
+**Hints:**
+- Consider using [algorithm or pattern]
+- The [documentation] section on [topic] is helpful
+- One approach is [suggestion], but feel free to explore alternatives
+
+#### Step 3.2: [Performance tuning]
+
+Optimize your implementation:
+
+**Profiling:**
+```python
+import cProfile
+
+cProfile.run('your_function()')
+```
+
+**Target performance:**
+- [ ] Latency < [X] ms
+- [ ] CPU usage < [Y]%
+- [ ] Memory footprint < [Z] MB
+
+<!-- COMPREHENSIVE TESTING: Validation strategies -->
+## Testing and Validation
+
+### Unit Tests
+
+Ensure all unit tests pass:
+
+```bash
+python -m pytest tests/ -v --cov=src
+```
+
+**Coverage requirement:** Aim for >80% code coverage.
+
+### Integration Tests
+
+Test the complete system:
+
+```bash
+python scripts/run_integration_tests.sh
+```
+
+**Scenarios to test:**
+1. [Normal operation scenario]
+2. [Edge case 1]
+3. [Edge case 2]
+4. [Error handling scenario]
+
+### Performance Benchmarks
+
+Run performance benchmarks:
+
+```bash
+python scripts/benchmark.py
+```
+
+**Expected results:**
+| Metric | Target | Acceptable Range |
+|--------|--------|------------------|
+| Latency | [X] ms | [X±Y] ms |
+| Throughput | [N] ops/sec | > [M] ops/sec |
+| Accuracy | [P]% | > [Q]% |
+
+:::info Debugging Tips
+If tests are failing:
+1. Check [common issue 1]
+2. Verify [configuration item]
+3. Review logs in [location]
+4. Use `--verbose` flag for detailed output
+:::
+
+<!-- EXTENSIONS: Optional challenges -->
+## Extensions and Challenges
+
+### Challenge 1: [Advanced Feature] ⭐
+
+**Difficulty:** Intermediate
+
+**Description:** Extend your implementation to support [additional capability].
+
+**Hints:**
+- This requires understanding [concept]
+- Consider modifying [component]
+- One approach: [suggestion]
+
+**Deliverable:** [Specific outcome or demonstration]
+
+### Challenge 2: [Optimization] ⭐⭐
+
+**Difficulty:** Advanced
+
+**Description:** Improve performance by [optimization goal].
+
+**Approach:** [High-level strategy]
+
+**Success criteria:** Achieve [metric] improvement over baseline.
+
+### Challenge 3: [Real-World Extension] ⭐⭐⭐
+
+**Difficulty:** Advanced
+
+**Description:** Adapt your lab solution for [real-world scenario or hardware].
+
+**Requirements:**
+- [Specific constraint or requirement]
+- [Integration point]
+- [Performance target]
+
+<!-- REFLECTION: Deepen understanding through analysis -->
+## Reflection and Analysis
+
+### Critical Thinking Questions
+
+1. **Design Decisions:** Why did you choose [specific approach] over [alternative]? What are the trade-offs?
+
+2. **Performance Analysis:** Where is the bottleneck in your implementation? How could you optimize further?
+
+3. **Robustness:** What edge cases might break your solution? How would you handle them in production?
+
+4. **Integration:** How does this lab component fit into a larger robotic system? What interfaces would you expose?
+
+### Discussion Points
+
+Discuss with peers or reflect on:
+
+- [Technical question about design choice]
+- [Conceptual question about underlying principle]
+- [Application question about real-world usage]
+
+<!-- KEY TAKEAWAYS: Summarize learning outcomes -->
+## Key Takeaways
+
+<!-- Import KeyTakeaways component when implemented in later phases -->
+<!-- <KeyTakeaways>
+  - Integration skill learned
+  - Problem-solving approach
+  - Tools mastered
+  - Concepts reinforced through application
+</KeyTakeaways> -->
+
+**What you achieved:**
+- [Skill or capability developed]
+- [Tool or technology mastered]
+- [Concept reinforced through hands-on practice]
+- [Integration or system-level understanding]
+- [Debugging or troubleshooting experience]
+
+## Next Steps and Capstone Integration
+
+### Apply to Your Capstone Project
+
+This lab prepares you for [specific capstone milestone]:
+
+**Direct applications:**
+- [Capstone component 1]: Use [lab skill/artifact]
+- [Capstone component 2]: Adapt [lab implementation]
+- [Capstone component 3]: Extend [lab concept]
+
+**Integration checklist:**
+- [ ] [Specific artifact to reuse]
+- [ ] [Skill to apply]
+- [ ] [Pattern to replicate]
+
+### Further Learning
+
+- **Next lab:** [Link to subsequent hands-on lab]
+- **Deep dive:** [Link to related concept chapter]
+- **Advanced topic:** [Link to extension material]
+
+---
+
+## Resources
+
+### Code Repository
+
+Complete solution (refer to after attempting the lab):
+- Repository: [Link to solution repo]
+- Commit: [Specific commit for this lab]
+
+### Documentation
+
+- [Tool/library official docs]
+- [API reference]
+- [Troubleshooting guide]
+
+### Community Support
+
+- Discussion forum: [Link]
+- Office hours: [Schedule and location]
+- TA/instructor contact: [Contact info]

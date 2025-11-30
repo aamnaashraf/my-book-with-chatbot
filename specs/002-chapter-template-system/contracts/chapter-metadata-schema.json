@@ -1,0 +1,201 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/your-org/textbook/schemas/chapter-metadata.json",
+  "title": "Chapter Metadata Schema",
+  "description": "Validation schema for Docusaurus chapter frontmatter in Physical AI & Humanoid Robotics Textbook. Enforces metadata standards for learning objectives, prerequisites, content types, and SEO fields.",
+  "type": "object",
+  "required": [
+    "title",
+    "description",
+    "keywords",
+    "sidebar_position",
+    "learning_objectives",
+    "prerequisites",
+    "estimated_time",
+    "content_type",
+    "difficulty"
+  ],
+  "properties": {
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100,
+      "description": "Chapter title displayed in navigation and page header. Should be concise and descriptive.",
+      "examples": [
+        "Introduction to Forward Kinematics",
+        "Understanding Sensor Fusion",
+        "Building Your First Robot Controller"
+      ]
+    },
+    "description": {
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 160,
+      "description": "SEO meta description for search engines and social media. Ideal length is 120-160 characters.",
+      "examples": [
+        "Learn how to calculate robot end-effector positions using forward kinematics transformations with practical examples."
+      ]
+    },
+    "keywords": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 2,
+        "maxLength": 50
+      },
+      "minItems": 3,
+      "maxItems": 10,
+      "uniqueItems": true,
+      "description": "SEO keywords for search indexing and discovery. Choose specific, relevant terms.",
+      "examples": [
+        ["robotics", "kinematics", "forward kinematics", "transformations", "DH parameters"]
+      ]
+    },
+    "sidebar_position": {
+      "type": "number",
+      "minimum": 1,
+      "multipleOf": 1,
+      "description": "Position in sidebar navigation (positive integer). Lower numbers appear first.",
+      "examples": [1, 2, 3, 10]
+    },
+    "learning_objectives": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 10,
+        "maxLength": 200,
+        "pattern": "^(Understand|Define|Identify|List|Name|Recall|Recognize|State|Classify|Describe|Discuss|Explain|Interpret|Summarize|Apply|Calculate|Demonstrate|Execute|Implement|Solve|Use|Analyze|Compare|Contrast|Differentiate|Examine|Investigate|Assess|Critique|Evaluate|Judge|Justify|Validate|Build|Construct|Create|Design|Develop|Formulate|Generate)",
+        "description": "Learning objective starting with a Bloom's taxonomy verb (Understand, Apply, Analyze, etc.)"
+      },
+      "minItems": 2,
+      "maxItems": 5,
+      "description": "2-5 measurable learning objectives using Bloom's taxonomy verbs. Each should describe what learners will be able to do after completing the chapter.",
+      "examples": [
+        [
+          "Understand the Denavit-Hartenberg (DH) convention for robot modeling",
+          "Calculate transformation matrices for robotic manipulators",
+          "Compute end-effector position and orientation from joint angles",
+          "Apply forward kinematics to 2-DOF and 3-DOF robot arms"
+        ]
+      ]
+    },
+    "prerequisites": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^docs/.+$",
+        "description": "Path to prerequisite chapter relative to docs/ directory"
+      },
+      "description": "Array of paths to prerequisite chapters. Can be empty if no prerequisites are required.",
+      "examples": [
+        ["docs/fundamentals/coordinate-systems", "docs/fundamentals/matrix-transformations"],
+        []
+      ]
+    },
+    "estimated_time": {
+      "type": "number",
+      "minimum": 5,
+      "maximum": 180,
+      "multipleOf": 5,
+      "description": "Estimated reading/completion time in minutes. Should be a multiple of 5 (e.g., 15, 30, 45).",
+      "examples": [15, 30, 45, 60]
+    },
+    "content_type": {
+      "type": "string",
+      "enum": ["tutorial", "concept", "hands-on-lab", "reference"],
+      "description": "Content variant type that determines template structure and emphasis. Tutorial = step-by-step, Concept = explanatory, Hands-on Lab = practical exercise, Reference = lookup/API.",
+      "examples": ["tutorial", "concept"]
+    },
+    "difficulty": {
+      "type": "string",
+      "enum": ["beginner", "intermediate", "advanced"],
+      "description": "Difficulty level for reader expectations. Beginner = introductory with minimal prerequisites, Intermediate = foundational knowledge required, Advanced = expert-level with complex concepts.",
+      "examples": ["beginner", "intermediate"]
+    },
+    "pagination_prev": {
+      "oneOf": [
+        {
+          "type": "string",
+          "pattern": "^docs/.+$",
+          "description": "Path to previous page (relative to docs/)"
+        },
+        {
+          "type": "null",
+          "description": "Disable previous page link"
+        }
+      ],
+      "description": "Override the default previous page link in pagination. Set to null to disable. Docusaurus built-in feature.",
+      "examples": ["docs/module-1/introduction", null]
+    },
+    "pagination_next": {
+      "oneOf": [
+        {
+          "type": "string",
+          "pattern": "^docs/.+$",
+          "description": "Path to next page (relative to docs/)"
+        },
+        {
+          "type": "null",
+          "description": "Disable next page link"
+        }
+      ],
+      "description": "Override the default next page link in pagination. Set to null to disable. Docusaurus built-in feature.",
+      "examples": ["docs/module-1/kinematics", null]
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 2,
+        "maxLength": 30
+      },
+      "uniqueItems": true,
+      "description": "Tags for filtering and organization. Docusaurus built-in feature that enables tag-based navigation.",
+      "examples": [["robotics", "beginner-friendly", "python"]]
+    },
+    "draft": {
+      "type": "boolean",
+      "description": "Hide this page from production builds. Useful during authoring. Docusaurus built-in feature.",
+      "default": false,
+      "examples": [true, false]
+    }
+  },
+  "additionalProperties": true,
+  "examples": [
+    {
+      "title": "Introduction to Forward Kinematics",
+      "description": "Learn how to calculate robot end-effector positions using forward kinematics transformations with practical examples.",
+      "keywords": ["robotics", "kinematics", "forward kinematics", "transformations", "DH parameters"],
+      "sidebar_position": 3,
+      "learning_objectives": [
+        "Understand the Denavit-Hartenberg (DH) convention for robot modeling",
+        "Calculate transformation matrices for robotic manipulators",
+        "Compute end-effector position and orientation from joint angles",
+        "Apply forward kinematics to 2-DOF and 3-DOF robot arms"
+      ],
+      "prerequisites": [
+        "docs/fundamentals/coordinate-systems",
+        "docs/fundamentals/matrix-transformations"
+      ],
+      "estimated_time": 45,
+      "content_type": "tutorial",
+      "difficulty": "intermediate"
+    },
+    {
+      "title": "Robotics Glossary",
+      "description": "Comprehensive reference of robotics terms, definitions, and concepts used throughout the textbook.",
+      "keywords": ["glossary", "reference", "robotics", "terminology", "definitions"],
+      "sidebar_position": 100,
+      "learning_objectives": [
+        "Locate definitions of robotics terminology quickly",
+        "Understand common robotics acronyms and abbreviations"
+      ],
+      "prerequisites": [],
+      "estimated_time": 10,
+      "content_type": "reference",
+      "difficulty": "beginner",
+      "pagination_prev": null,
+      "pagination_next": null
+    }
+  ]
+}

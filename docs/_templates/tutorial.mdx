@@ -1,0 +1,260 @@
+---
+# ============================================================================
+# TUTORIAL TEMPLATE - Step-by-Step Procedural Guide
+# ============================================================================
+# Use this template for chapters that teach a specific skill through
+# sequential steps. Tutorials emphasize hands-on practice and clear outcomes.
+#
+# Best for: Learning a new tool, following a workflow, building something
+# Examples: "Setting up ROS 2", "Creating your first URDF model"
+# ============================================================================
+
+# REQUIRED METADATA (Replace ALL values below)
+title: Your Tutorial Title Here
+description: Brief description (10-160 characters) for SEO and previews
+keywords: [keyword1, keyword2, keyword3, keyword4, keyword5]  # 3-10 keywords
+sidebar_position: 1  # Integer: position in sidebar (1, 2, 3...)
+
+# Learning objectives using Bloom's taxonomy verbs (2-5 objectives)
+# Start each with: Understand, Apply, Demonstrate, Implement, Build, etc.
+learning_objectives:
+  - Understand [specific concept or principle]
+  - Apply [technique or method] to [context]
+  - Implement [specific skill] in [tool/environment]
+
+# Prerequisites: paths to required chapters (use "docs/path/to/chapter" format)
+# Use empty array [] if no prerequisites
+prerequisites:
+  - docs/module-name/prerequisite-chapter
+
+# Estimated completion time in minutes (must be multiple of 5: 15, 30, 45, 60, etc.)
+estimated_time: 45
+
+# Content type (DO NOT CHANGE for this template)
+content_type: tutorial
+
+# Difficulty level: beginner | intermediate | advanced
+difficulty: intermediate
+
+# OPTIONAL METADATA (Uncomment if needed)
+# tags: [ros2, python, hands-on]  # For tag-based filtering
+# draft: true  # Hide from production builds during authoring
+# pagination_prev: docs/previous-chapter  # Override default previous link
+# pagination_next: docs/next-chapter      # Override default next link
+---
+
+<!--
+  ============================================================================
+  TUTORIAL STRUCTURE GUIDANCE
+  ============================================================================
+
+  Tutorials should follow this structure:
+  1. Learning Objectives & Prerequisites (auto-displayed from frontmatter)
+  2. Introduction - What you'll build/learn and why it matters
+  3. Setup/Prerequisites - Tools, environment, starting point
+  4. Step-by-Step Instructions - Numbered steps with explanations
+  5. Verification/Testing - How to confirm success
+  6. Key Takeaways - Summary of what was learned
+  7. Next Steps - Related topics or advanced extensions
+
+  TUTORIAL BEST PRACTICES:
+  - Use numbered lists for sequential steps
+  - Include code examples inline with explanations
+  - Add screenshots or diagrams for complex steps
+  - Provide expected outputs after each major step
+  - Include troubleshooting tips in callouts
+  - End with a working, testable result
+  ============================================================================
+-->
+
+import LearningObjectives from '@site/src/components/LearningObjectives';
+import Prerequisites from '@site/src/components/Prerequisites';
+
+<LearningObjectives objectives={frontMatter.learning_objectives} />
+<Prerequisites prereqs={frontMatter.prerequisites} estimatedTime={frontMatter.estimated_time} />
+
+# {frontMatter.title}
+
+<!-- INTRODUCTION: Explain what readers will build/learn and why it's valuable -->
+## Introduction
+
+In this tutorial, you'll learn [specific skill/outcome]. By the end, you'll have [concrete deliverable or capability].
+
+**Why this matters:** [1-2 sentences on real-world relevance or how this builds toward course goals]
+
+<!-- SETUP: List required tools, software versions, starting files, or environment -->
+## Prerequisites and Setup
+
+Before you begin, ensure you have:
+
+- **Software:** [Tool name] version X.X or higher
+- **Hardware:** [If applicable, e.g., "Robot kit with servo motors"]
+- **Files:** [Download link or reference to starter code]
+- **Knowledge:** Familiarity with [concepts from prerequisite chapters]
+
+### Verify Your Environment
+
+```bash
+# Command to check tool installation
+tool-name --version
+# Expected output: vX.X.X
+```
+
+<!-- MAIN CONTENT: Step-by-step instructions with code, explanations, and outputs -->
+## Step 1: [First Major Step]
+
+<!-- Explain WHAT you're doing and WHY before showing HOW -->
+Brief explanation of what this step accomplishes and how it fits into the overall goal.
+
+### Instructions
+
+1. [Detailed substep with command or action]
+   ```python
+   # Example code with inline comments
+   import example_library
+
+   # Create instance with specific parameters
+   instance = example_library.Thing(param1='value')
+   ```
+
+2. [Next substep with expected output]
+   ```bash
+   $ command-to-run
+   Expected output:
+   Success: Operation completed
+   ```
+
+3. [Verification step]
+   **Expected result:** You should see [specific outcome]. If not, check [common issue].
+
+:::tip Troubleshooting
+If you encounter [common error], try [solution]. This happens when [explanation].
+:::
+
+## Step 2: [Second Major Step]
+
+Continue with clear, sequential steps. Each major step should:
+- Have a clear purpose
+- Build on previous steps
+- Include verification points
+- Provide context for why it's necessary
+
+### Code Example with Explanation
+
+```python
+def example_function(parameter):
+    """
+    Explain what this function does at a high level.
+
+    Args:
+        parameter: What this parameter controls
+
+    Returns:
+        What the function produces
+    """
+    # Implementation details with comments
+    result = parameter * 2
+    return result
+```
+
+**Understanding the code:**
+- Line 1-2: [Explain key concept]
+- Line 3: [Explain decision or approach]
+- Line 4: [Explain expected behavior]
+
+:::info Why This Approach?
+Explain the reasoning behind a particular implementation choice or alternative approaches that were rejected.
+:::
+
+## Step 3: [Testing and Validation]
+
+Now that you've completed the implementation, let's verify everything works correctly.
+
+### Run the Complete Example
+
+```bash
+# Final command to test everything together
+python your_script.py --input test_data.txt
+```
+
+**Expected output:**
+```
+[Show complete expected output]
+Process completed successfully
+Results saved to: output/results.json
+```
+
+### Verification Checklist
+
+- [ ] [Specific outcome 1 achieved]
+- [ ] [Specific outcome 2 achieved]
+- [ ] [No error messages in console]
+- [ ] [Output matches expected format]
+
+<!-- KEY TAKEAWAYS: Summarize what was learned using the KeyTakeaways component -->
+## Key Takeaways
+
+<!-- Import KeyTakeaways component when it's implemented in later phases -->
+<!-- <KeyTakeaways>
+  - Main concept or skill learned
+  - Important technique or pattern
+  - Common pitfall to avoid
+  - How this connects to broader robotics concepts
+</KeyTakeaways> -->
+
+**What you learned:**
+- [Key concept 1]
+- [Key concept 2]
+- [Key technique or pattern]
+- [How this connects to course goals]
+
+## Next Steps
+
+Now that you've mastered [this topic], you're ready to:
+
+1. **Try it yourself:** [Suggested modification or extension exercise]
+2. **Go deeper:** [Link to related advanced topic]
+3. **Apply it:** [Suggestion for capstone project integration]
+
+### Related Chapters
+
+- [Link to next logical chapter in sequence]
+- [Link to advanced topic that builds on this]
+- [Link to alternative approach or related concept]
+
+<!-- EXERCISES: Optional practice problems using ExerciseBlock component -->
+## Practice Exercises
+
+<!-- Import ExerciseBlock component when it's implemented in later phases -->
+<!-- <ExerciseBlock title="Extend the Implementation" difficulty="intermediate">
+
+### Problem
+Modify the tutorial code to [specific challenge].
+
+### Hints
+- Consider how [concept] applies here
+- Look at [specific function] for inspiration
+- Remember that [key principle]
+
+### Solution
+[Provide solution or link to solution file]
+
+</ExerciseBlock> -->
+
+### Exercise 1: [Practice Task]
+
+**Challenge:** [Describe what to build or modify]
+
+**Hints:**
+- [Hint 1]
+- [Hint 2]
+
+**Solution:** Available in `examples/tutorial-name/exercise1-solution.py`
+
+---
+
+## References
+
+- [Official documentation link]
+- [Related academic paper or article]
+- [Useful tool or library reference]

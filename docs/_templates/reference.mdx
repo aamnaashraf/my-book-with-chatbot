@@ -1,0 +1,511 @@
+---
+# ============================================================================
+# REFERENCE TEMPLATE - Quick Lookup/API Documentation
+# ============================================================================
+# Use this template for chapters that serve as quick reference material.
+# References emphasize findability and completeness over narrative flow.
+#
+# Best for: API docs, command lists, parameter references, glossaries
+# Examples: "ROS 2 CLI Reference", "URDF Tag Reference", "Glossary"
+# ============================================================================
+
+# REQUIRED METADATA (Replace ALL values below)
+title: Your Reference Title Here
+description: Brief description (10-160 characters) for SEO and previews
+keywords: [keyword1, keyword2, keyword3, keyword4, keyword5]  # 3-10 keywords
+sidebar_position: 100  # References often go at end of module (high number)
+
+# Learning objectives using Bloom's taxonomy verbs (2-5 objectives)
+# For references, focus on: Identify, Locate, Recall, List, Define
+learning_objectives:
+  - Locate [specific information] quickly when needed
+  - Identify [parameters/commands] for [specific task]
+
+# Prerequisites: usually minimal for reference material
+prerequisites: []  # References often have no prerequisites
+
+# Estimated time: usually shorter since users jump to specific sections
+estimated_time: 10
+
+# Content type (DO NOT CHANGE for this template)
+content_type: reference
+
+# Difficulty level: usually beginner (references are meant to be accessible)
+difficulty: beginner
+
+# OPTIONAL METADATA (Uncomment if needed)
+# tags: [reference, api, quick-lookup]  # For tag-based filtering
+# draft: true  # Hide from production builds during authoring
+# pagination_prev: null  # Often want to disable pagination for references
+# pagination_next: null
+---
+
+<!--
+  ============================================================================
+  REFERENCE STRUCTURE GUIDANCE
+  ============================================================================
+
+  Reference chapters should follow this structure:
+  1. Learning Objectives & Prerequisites (auto-displayed from frontmatter)
+  2. Introduction - Scope and how to use this reference
+  3. Quick Reference Table/Index - Jump links to sections
+  4. Detailed Entries - Organized alphabetically, by category, or by frequency
+  5. Examples - Brief usage examples for each entry
+  6. Cross-references - Links to related references and tutorials
+
+  REFERENCE BEST PRACTICES:
+  - Prioritize scannability and searchability
+  - Use consistent formatting for all entries
+  - Include examples for every entry
+  - Provide multiple organization methods (alphabetical, categorical, etc.)
+  - Add "See also" links to connect related entries
+  - Use tables for structured information
+  - Keep prose minimal - users want quick answers
+  - Include version information for APIs/commands
+  - Add deprecation warnings where applicable
+  ============================================================================
+-->
+
+import LearningObjectives from '@site/src/components/LearningObjectives';
+import Prerequisites from '@site/src/components/Prerequisites';
+
+<LearningObjectives objectives={frontMatter.learning_objectives} />
+<Prerequisites prereqs={frontMatter.prerequisites} estimatedTime={frontMatter.estimated_time} />
+
+# {frontMatter.title}
+
+<!-- INTRODUCTION: Explain scope and how to use the reference -->
+## Introduction
+
+This reference provides [comprehensive description of what's documented]. Use this page to quickly look up [types of information provided].
+
+### How to Use This Reference
+
+- **Quick lookup:** Use the search function (Ctrl+F / Cmd+F) to find specific [items]
+- **Browse by category:** Use the [category index](#categories) to explore related [items]
+- **Alphabetical index:** See [complete alphabetical list](#alphabetical-index)
+- **Common tasks:** Jump to [frequently used entries](#common-tasks)
+
+### Conventions Used
+
+This reference uses the following formatting conventions:
+
+| Format | Meaning | Example |
+|--------|---------|---------|
+| `code` | Command, parameter, or code element | `ros2 run` |
+| **bold** | Required parameter | **package_name** |
+| *italic* | Optional parameter | *options* |
+| `[value]` | Placeholder - replace with actual value | `[your_package]` |
+| ❗ | Important note or warning | ❗ Deprecated since v2.0 |
+
+---
+
+## Quick Reference Table
+
+<!-- QUICK REFERENCE: High-level overview for most common items -->
+
+| Item | Purpose | Common Usage | Reference |
+|------|---------|--------------|-----------|
+| [Item 1] | [Brief description] | `code example` | [Details](#item-1) |
+| [Item 2] | [Brief description] | `code example` | [Details](#item-2) |
+| [Item 3] | [Brief description] | `code example` | [Details](#item-3) |
+| [Item 4] | [Brief description] | `code example` | [Details](#item-4) |
+
+---
+
+## Categories
+
+<!-- CATEGORY INDEX: Grouped by functionality or theme -->
+
+### Category 1: [Category Name]
+
+[Brief description of this category's purpose]
+
+- **[Item A](#item-a)** - [One-line description]
+- **[Item B](#item-b)** - [One-line description]
+- **[Item C](#item-c)** - [One-line description]
+
+### Category 2: [Category Name]
+
+[Brief description of this category's purpose]
+
+- **[Item D](#item-d)** - [One-line description]
+- **[Item E](#item-e)** - [One-line description]
+- **[Item F](#item-f)** - [One-line description]
+
+### Category 3: [Category Name]
+
+[Brief description of this category's purpose]
+
+- **[Item G](#item-g)** - [One-line description]
+- **[Item H](#item-h)** - [One-line description]
+
+---
+
+## Detailed Reference
+
+<!-- DETAILED ENTRIES: Comprehensive information for each item -->
+
+### Item 1
+
+**Category:** [Category name]
+
+**Since version:** [X.X]
+
+**Description:** [Detailed explanation of what this item does or represents]
+
+**Syntax:**
+```
+syntax pattern or signature
+```
+
+**Parameters:**
+
+| Parameter | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| param1 | string | Yes | - | [Purpose and constraints] |
+| param2 | int | No | 0 | [Purpose and valid range] |
+| param3 | bool | No | false | [Purpose and effect] |
+
+**Example:**
+```python
+# Example usage with explanation
+from module import Item1
+
+# Create instance with required parameters
+instance = Item1(param1="value")
+
+# Call method with optional parameters
+result = instance.method(param2=10, param3=True)
+
+# Expected output
+print(result)  # Output: [expected result]
+```
+
+**Returns/Output:**
+- **Type:** [Return type]
+- **Description:** [What is returned and its meaning]
+
+**Errors:**
+
+| Error | Condition | Solution |
+|-------|-----------|----------|
+| `ErrorType1` | When [condition] | [How to fix] |
+| `ErrorType2` | When [condition] | [How to fix] |
+
+:::tip Common Use Case
+Most commonly used for [specific scenario]. In this case, set param1 to [suggested value] and param2 to [suggested value].
+:::
+
+**See also:**
+- [Related Item 1](#related-item-1)
+- [Tutorial demonstrating usage](link-to-tutorial)
+
+---
+
+### Item 2
+
+**Category:** [Category name]
+
+**Since version:** [X.X]
+
+❗ **Deprecated:** Use [Item X](#item-x) instead. This item will be removed in version [Y.Y].
+
+**Description:** [Explanation]
+
+**Syntax:**
+```
+syntax pattern
+```
+
+**Migration Guide:**
+
+If you're currently using Item 2:
+```python
+# Old approach (deprecated)
+old_result = Item2(old_param="value")
+```
+
+Switch to Item X:
+```python
+# New approach (recommended)
+new_result = ItemX(new_param="value", additional_config=True)
+```
+
+**See also:**
+- [Item X (replacement)](#item-x)
+- [Migration guide](link)
+
+---
+
+### Item 3
+
+**Category:** [Category name]
+
+**Since version:** [X.X]
+
+**Description:** [Detailed explanation]
+
+**Syntax:**
+```
+command [required_arg] [optional_arg]
+```
+
+**Arguments:**
+
+- `required_arg` (string): [Description of what this argument does]
+  - **Valid values:** [List or range of acceptable values]
+  - **Example:** `value1`, `value2`
+
+- `optional_arg` (int, optional): [Description]
+  - **Default:** 0
+  - **Range:** 0-100
+
+**Options/Flags:**
+
+| Flag | Short | Description | Example |
+|------|-------|-------------|---------|
+| `--verbose` | `-v` | Enable detailed output | `command -v` |
+| `--config` | `-c` | Specify config file path | `command -c path/to/config` |
+| `--help` | `-h` | Display help | `command -h` |
+
+**Examples:**
+
+**Basic usage:**
+```bash
+$ command required_value
+Output: [expected output]
+```
+
+**With optional argument:**
+```bash
+$ command required_value 50
+Output: [expected output with optional arg]
+```
+
+**With flags:**
+```bash
+$ command required_value --verbose --config custom.yaml
+Output: [detailed verbose output]
+```
+
+**Exit codes:**
+
+| Code | Meaning | Action |
+|------|---------|--------|
+| 0 | Success | - |
+| 1 | Invalid argument | Check argument format |
+| 2 | File not found | Verify file path |
+| 3 | Permission denied | Check file permissions |
+
+:::danger Important
+This command modifies [system state]. Always [safety precaution] before running in production.
+:::
+
+**See also:**
+- [Related command](#related-command)
+- [Tutorial: Using [command]](link)
+
+---
+
+### Item 4
+
+**Category:** [Category name]
+
+**Since version:** [X.X]
+
+**Description:** [Detailed explanation of configuration parameter or file format]
+
+**Location:** `path/to/file.ext`
+
+**Format:** [YAML | JSON | XML | etc.]
+
+**Schema:**
+
+```yaml
+# Complete configuration file structure with comments
+
+root_element:
+  # Required configuration section
+  required_section:
+    param1: value  # Description of param1 (required, type: string)
+    param2: 123    # Description of param2 (required, type: int)
+
+  # Optional configuration section
+  optional_section:
+    param3: true   # Description of param3 (optional, type: bool, default: false)
+    param4:        # Description of param4 (optional, type: list)
+      - item1
+      - item2
+```
+
+**Parameters:**
+
+**required_section:**
+
+- `param1` (string, required): [Detailed description]
+  - **Valid values:** [Options or pattern]
+  - **Example:** `"value"`
+
+- `param2` (int, required): [Detailed description]
+  - **Range:** 1-1000
+  - **Example:** 100
+
+**optional_section:**
+
+- `param3` (bool, optional): [Detailed description]
+  - **Default:** `false`
+  - **Effect:** [What this parameter controls]
+
+- `param4` (list, optional): [Detailed description]
+  - **Item format:** [Format of list items]
+  - **Example:** `["item1", "item2"]`
+
+**Example Configuration:**
+
+```yaml
+# Minimal working configuration
+root_element:
+  required_section:
+    param1: "production"
+    param2: 100
+```
+
+```yaml
+# Full configuration with all options
+root_element:
+  required_section:
+    param1: "development"
+    param2: 50
+  optional_section:
+    param3: true
+    param4:
+      - "custom_item1"
+      - "custom_item2"
+```
+
+**Validation:**
+
+To validate your configuration file:
+```bash
+validate_tool path/to/file.ext
+```
+
+**See also:**
+- [Related configuration](#related-config)
+- [Configuration best practices](link)
+
+---
+
+## Alphabetical Index
+
+<!-- ALPHABETICAL INDEX: Complete A-Z listing with jump links -->
+
+### A
+
+- **[Item A](#item-a)** - [Brief description]
+
+### B
+
+- **[Item B](#item-b)** - [Brief description]
+
+### C
+
+- **[Item C](#item-c)** - [Brief description]
+
+### D
+
+- **[Item D](#item-d)** - [Brief description]
+
+[Continue through alphabet as needed]
+
+---
+
+## Common Tasks
+
+<!-- COMMON TASKS: Recipe-style quick answers for frequent use cases -->
+
+### Task 1: [Common task description]
+
+**Goal:** [What you want to accomplish]
+
+**Quick solution:**
+```bash
+# Command or code to accomplish the task
+command --option value
+```
+
+**Explanation:** This uses [Item X](#item-x) with [specific parameter] to [outcome].
+
+**See also:** [Related task](#related-task)
+
+---
+
+### Task 2: [Another common task]
+
+**Goal:** [What you want to accomplish]
+
+**Steps:**
+1. First, [action using Item Y](#item-y)
+   ```
+   code example
+   ```
+
+2. Then, [action using Item Z](#item-z)
+   ```
+   code example
+   ```
+
+3. Verify with:
+   ```
+   verification command
+   ```
+
+**Expected output:** [Description of successful result]
+
+---
+
+## Version Compatibility
+
+<!-- VERSION INFO: What's available in which versions -->
+
+| Feature/Item | Version Added | Version Deprecated | Version Removed | Notes |
+|--------------|---------------|-------------------|-----------------|-------|
+| Item 1 | 1.0 | - | - | Stable |
+| Item 2 | 1.5 | 2.0 | 3.0 | Use Item X instead |
+| Item 3 | 2.0 | - | - | Stable |
+| Item 4 | 2.5 | - | - | Beta in 2.0 |
+
+---
+
+## External Resources
+
+### Official Documentation
+
+- [Official API documentation](link)
+- [Command-line reference](link)
+- [Configuration file specification](link)
+
+### Tutorials and Guides
+
+- [Getting started tutorial](link-to-tutorial)
+- [Advanced usage guide](link-to-tutorial)
+- [Best practices](link)
+
+### Community Resources
+
+- [Discussion forum](link)
+- [Stack Overflow tag](link)
+- [GitHub issues](link)
+
+---
+
+## Contributing to This Reference
+
+Found an error or want to add missing information?
+
+- **Report issues:** [Link to issue tracker]
+- **Suggest improvements:** [Link to contribution guide]
+- **Edit this page:** [Link to source file]
+
+**Last updated:** [Date or version]

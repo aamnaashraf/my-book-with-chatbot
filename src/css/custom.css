@@ -201,3 +201,271 @@
   font-size: 0.875rem;
   color: var(--ifm-color-emphasis-700);
 }
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Chapter Template System - Custom Components
+   Feature: 002-chapter-template-system
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/* Learning Objectives Component */
+.learning-objectives {
+  padding: 1.5rem;
+  margin: 2rem 0;
+  border-radius: 8px;
+  border-left: 4px solid var(--ifm-color-primary);
+  background-color: var(--ifm-background-surface-color);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.learning-objectives h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: var(--ifm-color-primary);
+  font-size: 1.25rem;
+}
+
+.learning-objectives ul {
+  margin: 0;
+  padding-left: 1.5rem;
+  list-style: none;
+}
+
+.learning-objectives li {
+  position: relative;
+  margin-bottom: 0.75rem;
+  padding-left: 1.5rem;
+  line-height: 1.6;
+}
+
+.learning-objectives li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--ifm-color-success);
+  font-weight: bold;
+}
+
+/* Dark mode adjustments for learning objectives */
+[data-theme='dark'] .learning-objectives {
+  background-color: var(--ifm-background-surface-color);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Prerequisites Component */
+.prerequisites {
+  padding: 1.5rem;
+  margin: 2rem 0 3rem 0;
+  border-radius: 8px;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  background-color: var(--ifm-background-surface-color);
+}
+
+.prerequisites h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.125rem;
+  color: var(--ifm-color-content);
+}
+
+.prerequisites .estimated-time {
+  display: inline-block;
+  margin-bottom: 1rem;
+  padding: 0.375rem 0.75rem;
+  border-radius: 4px;
+  background-color: var(--ifm-color-primary-lightest);
+  color: var(--ifm-color-primary-darkest);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.prerequisites ul {
+  margin: 0;
+  padding-left: 1.5rem;
+  list-style: none;
+}
+
+.prerequisites li {
+  margin-bottom: 0.5rem;
+}
+
+.prerequisites a {
+  color: var(--ifm-color-primary);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.prerequisites a:hover {
+  text-decoration: underline;
+}
+
+/* Dark mode adjustments for prerequisites */
+[data-theme='dark'] .prerequisites {
+  background-color: var(--ifm-background-surface-color);
+}
+
+[data-theme='dark'] .prerequisites .estimated-time {
+  background-color: var(--ifm-color-primary-darkest);
+  color: var(--ifm-color-primary-lightest);
+}
+
+/* Key Takeaways Component */
+.key-takeaways {
+  padding: 1.5rem;
+  margin: 2rem 0;
+  border-radius: 8px;
+  border-left: 4px solid var(--ifm-color-success);
+  background-color: var(--ifm-background-surface-color);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.key-takeaways::before {
+  content: '✓';
+  display: inline-block;
+  margin-right: 0.5rem;
+  font-size: 1.5rem;
+  color: var(--ifm-color-success);
+  vertical-align: middle;
+}
+
+.key-takeaways h3 {
+  display: inline-block;
+  margin: 0 0 1rem 0;
+  font-size: 1.25rem;
+  color: var(--ifm-color-success-dark);
+  vertical-align: middle;
+}
+
+.key-takeaways ul {
+  margin: 0;
+  padding-left: 1.5rem;
+}
+
+.key-takeaways li {
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+}
+
+/* Dark mode adjustments for key takeaways */
+[data-theme='dark'] .key-takeaways {
+  background-color: var(--ifm-background-surface-color);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Exercise Block Component */
+.exercise-block {
+  padding: 1.5rem;
+  margin: 2rem 0;
+  border-radius: 8px;
+  border: 2px solid var(--ifm-color-emphasis-300);
+  background-color: var(--ifm-background-surface-color);
+}
+
+.exercise-block .exercise-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.exercise-block h4 {
+  margin: 0;
+  font-size: 1.125rem;
+  color: var(--ifm-color-content);
+}
+
+.exercise-block .difficulty-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.exercise-block .problem,
+.exercise-block .hints,
+.exercise-block .solution {
+  margin-top: 1.5rem;
+}
+
+.exercise-block .problem h5,
+.exercise-block .hints h5,
+.exercise-block .solution h5 {
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ifm-color-primary);
+}
+
+.exercise-block .hints ul {
+  list-style: none;
+  padding-left: 1rem;
+}
+
+.exercise-block .hints li {
+  margin-bottom: 0.5rem;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.exercise-block .hints li::before {
+  content: '💡';
+  position: absolute;
+  left: 0;
+}
+
+/* Dark mode adjustments for exercise block */
+[data-theme='dark'] .exercise-block {
+  background-color: var(--ifm-background-surface-color);
+  border-color: var(--ifm-color-emphasis-500);
+}
+
+/* Difficulty Badge Styles */
+.badge-beginner {
+  background-color: var(--ifm-color-success-lighter);
+  color: var(--ifm-color-success-darkest);
+}
+
+.badge-intermediate {
+  background-color: var(--ifm-color-warning-lighter);
+  color: var(--ifm-color-warning-darkest);
+}
+
+.badge-advanced {
+  background-color: var(--ifm-color-danger-lighter);
+  color: var(--ifm-color-danger-darkest);
+}
+
+/* Dark mode badge adjustments */
+[data-theme='dark'] .badge-beginner {
+  background-color: var(--ifm-color-success-darkest);
+  color: var(--ifm-color-success-lightest);
+}
+
+[data-theme='dark'] .badge-intermediate {
+  background-color: var(--ifm-color-warning-darkest);
+  color: var(--ifm-color-warning-lightest);
+}
+
+[data-theme='dark'] .badge-advanced {
+  background-color: var(--ifm-color-danger-darkest);
+  color: var(--ifm-color-danger-lightest);
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 768px) {
+  .learning-objectives,
+  .prerequisites,
+  .key-takeaways,
+  .exercise-block {
+    padding: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  .exercise-block .exercise-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}

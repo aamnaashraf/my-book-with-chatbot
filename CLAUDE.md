@@ -208,3 +208,10 @@ Wait for consent; never auto-create ADRs. Group related decisions (stacks, authe
 
 ## Code Standards
 See `.specify/memory/constitution.md` for code quality, testing, performance, security, and architecture principles.
+
+## Active Technologies
+- TypeScript 5.x, React 18.x (Docusaurus 3.x dependency) + Docusaurus 3.x, MDX 3.x, React 18.x, Prism.js (syntax highlighting), AJV (JSON Schema validation) (002-chapter-template-system)
+- File-based (Markdown/MDX files in `docs/` directory, static assets in `static/`) (002-chapter-template-system)
+
+## Recent Changes
+- 002-chapter-template-system: Added TypeScript 5.x, React 18.x (Docusaurus 3.x dependency) + Docusaurus 3.x, MDX 3.x, React 18.x, Prism.js (syntax highlighting), AJV (JSON Schema validation)

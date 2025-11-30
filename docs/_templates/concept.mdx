@@ -1,0 +1,308 @@
+---
+# ============================================================================
+# CONCEPT TEMPLATE - Explanatory/Theoretical Content
+# ============================================================================
+# Use this template for chapters that explain theoretical concepts, principles,
+# or foundational knowledge. Concepts emphasize understanding over doing.
+#
+# Best for: Theory, background knowledge, explaining "why" or "how it works"
+# Examples: "Understanding Forward Kinematics", "Robot Dynamics Principles"
+# ============================================================================
+
+# REQUIRED METADATA (Replace ALL values below)
+title: Your Concept Title Here
+description: Brief description (10-160 characters) for SEO and previews
+keywords: [keyword1, keyword2, keyword3, keyword4, keyword5]  # 3-10 keywords
+sidebar_position: 1  # Integer: position in sidebar (1, 2, 3...)
+
+# Learning objectives using Bloom's taxonomy verbs (2-5 objectives)
+# Start each with: Understand, Explain, Describe, Classify, Analyze, Compare, etc.
+learning_objectives:
+  - Understand [specific concept or principle]
+  - Explain [relationship or mechanism]
+  - Analyze [component or system behavior]
+
+# Prerequisites: paths to required chapters (use "docs/path/to/chapter" format)
+# Use empty array [] if no prerequisites
+prerequisites:
+  - docs/module-name/prerequisite-chapter
+
+# Estimated reading time in minutes (must be multiple of 5: 15, 30, 45, 60, etc.)
+estimated_time: 30
+
+# Content type (DO NOT CHANGE for this template)
+content_type: concept
+
+# Difficulty level: beginner | intermediate | advanced
+difficulty: intermediate
+
+# OPTIONAL METADATA (Uncomment if needed)
+# tags: [theory, kinematics, fundamentals]  # For tag-based filtering
+# draft: true  # Hide from production builds during authoring
+# pagination_prev: docs/previous-chapter  # Override default previous link
+# pagination_next: docs/next-chapter      # Override default next link
+---
+
+<!--
+  ============================================================================
+  CONCEPT STRUCTURE GUIDANCE
+  ============================================================================
+
+  Concept chapters should follow this structure:
+  1. Learning Objectives & Prerequisites (auto-displayed from frontmatter)
+  2. Introduction - What concept you're explaining and why it matters
+  3. Core Explanation - Detailed explanation with diagrams, examples
+  4. Examples and Applications - Concrete instances of the concept
+  5. Common Misconceptions - Address typical misunderstandings
+  6. Key Takeaways - Summary and connections to broader topics
+  7. Further Reading - Deep dives and related concepts
+
+  CONCEPT BEST PRACTICES:
+  - Start with intuition before formalism
+  - Use analogies to build understanding
+  - Include diagrams, visualizations, or interactive demos
+  - Provide multiple examples at different complexity levels
+  - Connect theory to practical robotics applications
+  - Use callouts to highlight important points or warnings
+  - Avoid step-by-step instructions (use Tutorial template for that)
+  ============================================================================
+-->
+
+import LearningObjectives from '@site/src/components/LearningObjectives';
+import Prerequisites from '@site/src/components/Prerequisites';
+
+<LearningObjectives objectives={frontMatter.learning_objectives} />
+<Prerequisites prereqs={frontMatter.prerequisites} estimatedTime={frontMatter.estimated_time} />
+
+# {frontMatter.title}
+
+<!-- INTRODUCTION: Explain the concept at a high level and its importance -->
+## Introduction
+
+[Concept name] is [one-sentence definition]. This concept is fundamental to [area of robotics] because [explanation of significance].
+
+**Why this matters:** In real-world robotics applications, [concept] enables [practical capability or solves specific problem]. Understanding this concept is essential for [future topics or skills].
+
+<!-- MOTIVATION: Build intuition with analogies or everyday examples -->
+## Understanding the Core Idea
+
+Before diving into technical details, let's build intuition with an analogy.
+
+**Analogy:** [Everyday example that maps to the robotics concept]
+
+For example, imagine [concrete scenario]. In this scenario, [element A] behaves like [robotics element X], and [element B] corresponds to [robotics element Y]. This relationship helps us understand [key insight].
+
+<!-- DETAILED EXPLANATION: Present the concept formally with technical accuracy -->
+## Detailed Explanation
+
+### The Fundamentals
+
+[Concept] is defined by [formal definition or key characteristics]:
+
+1. **Property 1:** [Explanation of first key property]
+   - Sub-detail or implication
+   - Connection to other concepts
+
+2. **Property 2:** [Explanation of second key property]
+   - Mathematical relationship if applicable
+   - Visual representation or diagram
+
+3. **Property 3:** [Explanation of third key property]
+   - Practical consequences
+   - How it affects robot behavior
+
+:::info Key Insight
+[Important realization or non-obvious implication that helps deepen understanding]
+:::
+
+### Mathematical Formulation
+
+For readers comfortable with mathematics, [concept] can be expressed formally as:
+
+```
+Equation or formula with clear variable definitions
+```
+
+Where:
+- `variable1`: [Description and units]
+- `variable2`: [Description and units]
+- `result`: [Description and units]
+
+**Interpretation:** This equation tells us that [plain-language explanation of what the math means].
+
+<!-- EXAMPLES: Concrete instances that illustrate the concept -->
+## Examples and Applications
+
+### Example 1: Simple Case
+
+Consider [specific simple scenario]. In this case:
+
+- **Given:** [Initial conditions or parameters]
+- **Observation:** [What happens or behavior to explain]
+- **Explanation:** [How the concept explains this behavior]
+
+```python
+# Illustrative code showing the concept in action
+def demonstrate_concept(param1, param2):
+    """
+    This example shows how [concept] manifests in [context].
+    """
+    # Implementation that highlights the concept
+    result = param1 * param2  # This operation represents [aspect of concept]
+    return result
+```
+
+### Example 2: Real-World Application
+
+In industrial robotics, [concept] is applied when [specific task or scenario]:
+
+**Scenario:** [Describe real robot task]
+
+**How the concept applies:**
+1. [Step or component where concept is relevant]
+2. [Effect or consequence of the concept]
+3. [Why alternative approaches wouldn't work]
+
+**Outcome:** [Result or capability enabled by proper application of concept]
+
+:::tip Practical Application
+In your capstone project, you might use [concept] when [specific scenario]. Look for situations where [characteristic pattern or problem signature].
+:::
+
+<!-- VISUALIZATIONS: Diagrams, charts, or interactive elements -->
+## Visual Representation
+
+[Include a diagram, chart, or visual aid that helps illustrate the concept]
+
+**Diagram 1: [Title]**
+```
+[ASCII diagram or reference to image file in static/img/]
+```
+
+**Key observations from the diagram:**
+- [Insight 1 from visual]
+- [Insight 2 from visual]
+- [How visual clarifies concept]
+
+<!-- COMMON PITFALLS: Address typical misunderstandings -->
+## Common Misconceptions
+
+### Misconception 1: [Common wrong belief]
+
+**Why it's wrong:** [Explanation of why this belief is incorrect]
+
+**The truth:** [Correct understanding]
+
+**How to avoid this mistake:** [Practical advice]
+
+### Misconception 2: [Another common confusion]
+
+Many students believe [incorrect understanding], but actually [correct explanation].
+
+**Example of the confusion:** [Scenario where misconception leads to errors]
+
+**Correct approach:** [How to think about it properly]
+
+:::danger Important Distinction
+[Critical difference between two easily confused concepts or a key point that prevents serious errors]
+:::
+
+<!-- CONNECTIONS: Link to related concepts and applications -->
+## Connections to Other Concepts
+
+Understanding [this concept] provides the foundation for several advanced topics:
+
+### Related Concept 1: [Name]
+
+[This concept] directly connects to [related concept] because [explanation of relationship]. You'll encounter this connection when [context or application].
+
+**Key relationship:** [How the concepts interact or build on each other]
+
+### Application in [Area of Robotics]
+
+In [specific domain like motion planning, perception, etc.], [this concept] is used to [application]:
+
+- **Specific use:** [Concrete example]
+- **Why it matters:** [Impact or capability]
+- **What's next:** [Link to advanced topic]
+
+<!-- KEY TAKEAWAYS: Summarize essential points -->
+## Key Takeaways
+
+<!-- Import KeyTakeaways component when implemented in later phases -->
+<!-- <KeyTakeaways>
+  - Essential understanding 1
+  - Essential understanding 2
+  - Critical distinction or principle
+  - Connection to practical robotics
+</KeyTakeaways> -->
+
+**Essential points to remember:**
+- [Core understanding 1]
+- [Core understanding 2]
+- [Critical principle or relationship]
+- [Practical implication for robot systems]
+- [Connection to course learning goals]
+
+## Further Exploration
+
+### Deep Dive Topics
+
+If you want to explore [concept] in more depth, consider:
+
+1. **Mathematical Derivation:** [Link or reference to mathematical treatment]
+2. **Historical Context:** [How this concept evolved in robotics]
+3. **Alternative Formulations:** [Different ways to express or think about the concept]
+
+### Hands-On Practice
+
+To reinforce your understanding, try these activities:
+
+- **Build intuition:** [Suggested simulation, visualization, or experimentation]
+- **Apply the concept:** [Link to related tutorial that uses this concept]
+- **Test yourself:** [Link to practice problems or quiz]
+
+### Related Chapters
+
+- **Foundation:** [Link to prerequisite concept]
+- **Application:** [Link to tutorial that applies this concept]
+- **Extension:** [Link to advanced related concept]
+
+<!-- CONCEPTUAL EXERCISES: Thought experiments or analysis problems -->
+## Conceptual Questions
+
+Test your understanding with these questions:
+
+### Question 1: [Scenario-based question]
+
+**Scenario:** [Describe situation]
+
+**Question:** How does [concept] explain [observed behavior]?
+
+**Think about:**
+- [Guiding question 1]
+- [Guiding question 2]
+
+**Discussion:** [Explanation or link to discussion]
+
+### Question 2: [Comparison question]
+
+**Question:** How does [this concept] differ from [similar concept]? When would you use each?
+
+**Hint:** Consider [key differentiating factor]
+
+---
+
+## References and Further Reading
+
+### Academic Sources
+- [Textbook or paper citation]
+- [Research article relevant to concept]
+
+### Online Resources
+- [Official documentation or tutorial]
+- [Interactive visualization or demo]
+
+### Historical Context
+- [Original paper or milestone development]
+- [Evolution of the concept in robotics]
