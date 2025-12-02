@@ -1,0 +1,787 @@
+---
+title: "Chapter 5: Launch Files and Package Management"
+description: "Master ROS 2 package structure, Python launch files, and colcon build system to deploy multi-node robotic applications"
+keywords: ["launch files", "packages", "colcon", "package.xml", "setup.py", "workspace", "ros2 launch"]
+sidebar_position: 5
+learning_objectives:
+  - "Create Python launch files to manage multi-node systems with parameters and remapping"
+  - "Build ROS 2 packages with proper directory structure and dependency management"
+  - "Apply colcon build system to compile and install packages in workspaces"
+  - "Design reusable packages following ROS 2 conventions and best practices"
+prerequisites: ["Chapter 4: URDF Robot Modeling", "Python packaging basics", "Command-line workspace navigation"]
+estimated_time: 90
+content_type: "tutorial"
+difficulty: "intermediate"
+ros2_distribution: "humble"
+chapter_number: 5
+---
+
+# Chapter 5: Launch Files and Package Management
+
+You've learned to create nodes, communicate via topics/services/actions, and model robots in URDF. But how do you launch 10+ nodes at once? How do you organize code into reusable, distributable packages?
+
+This final chapter teaches you **professional ROS 2 development workflows**:
+- **Launch files** to start multi-node systems with one command
+- **Package structure** for organizing code, dependencies, and resources
+- **colcon build system** for compiling and installing packages
+- **Best practices** for maintainable, shareable robot software
+
+By the end, you'll have a complete ROS 2 package ready for deployment and distribution.
+
+## 5.1 Launch Files: Managing Multi-Node Systems
+
+<ConceptCallout type="definition" title="What is a Launch File?">
+
+A **launch file** is a Python script that:
+- Starts multiple nodes with one `ros2 launch` command
+- Passes parameters to nodes at startup
+- Remaps topics/services for integration
+- Conditionally launches nodes based on arguments
+- Configures logging and execution order
+
+Think of it as an orchestration script for your robotic system—instead of manually running 8 terminal windows, run one launch command.
+
+</ConceptCallout>
+
+### 5.1.1 Basic Python Launch File
+
+<CodeExample language="python" filename="simple_launch.py" difficulty="beginner" estimatedTime={15}>
+{`from launch import LaunchDescription
+from launch_ros.actions import Node
+
+def generate_launch_description():
+    return LaunchDescription([
+        # Node 1: Temperature sensor
+        Node(
+            package='my_robot_pkg',
+            executable='temperature_sensor',
+            name='temp_sensor_node',
+            output='screen'  # Print logs to console
+        ),
+
+        # Node 2: Temperature monitor
+        Node(
+            package='my_robot_pkg',
+            executable='temperature_monitor',
+            name='temp_monitor_node',
+            output='screen'
+        ),
+    ])
+`}
+</CodeExample>
+
+**Running the launch file:**
+
+<CodeExample language="bash" showLineNumbers={false}>
+{`# Launch both nodes with one command
+ros2 launch my_robot_pkg simple_launch.py
+
+# Both nodes start automatically with configured names
+`}
+</CodeExample>
+
+**Key Components**:
+- **`package`**: ROS 2 package containing the executable
+- **`executable`**: Name of the Python script or binary (from setup.py entry_points)
+- **`name`**: Node name (overrides the name set in Node() constructor)
+- **`output`**: Where to send logs (`'screen'` or `'log'`)
+
+### 5.1.2 Passing Parameters via Launch Files
+
+<CodeExample language="python" filename="params_launch.py" difficulty="intermediate">
+{`from launch import LaunchDescription
+from launch_ros.actions import Node
+
+def generate_launch_description():
+    return LaunchDescription([
+        Node(
+            package='my_robot_pkg',
+            executable='parameter_node',
+            name='configured_node',
+            parameters=[{
+                'robot_name': 'atlas',
+                'max_speed': 2.5,
+                'debug_mode': True,
+                'sensor_topics': ['/camera', '/lidar', '/imu']
+            }],
+            output='screen'
+        ),
+    ])
+`}
+</CodeExample>
+
+Parameters can also be loaded from YAML files:
+
+<CodeExample language="python" filename="yaml_params_launch.py" difficulty="intermediate">
+{`import os
+from ament_index_python.packages import get_package_share_directory
+from launch import LaunchDescription
+from launch_ros.actions import Node
+
+def generate_launch_description():
+    # Get path to config file
+    config = os.path.join(
+        get_package_share_directory('my_robot_pkg'),
+        'config',
+        'robot_params.yaml'
+    )
+
+    return LaunchDescription([
+        Node(
+            package='my_robot_pkg',
+            executable='configurable_node',
+            name='robot_controller',
+            parameters=[config],  # Load from YAML file
+            output='screen'
+        ),
+    ])
+`}
+</CodeExample>
+
+**YAML parameter file** (`config/robot_params.yaml`):
+
+<CodeExample language="yaml" filename="robot_params.yaml">
+{`robot_controller:
+  ros__parameters:
+    max_linear_velocity: 1.0
+    max_angular_velocity: 0.5
+    control_frequency: 50.0
+    pid_gains:
+      kp: 1.2
+      ki: 0.1
+      kd: 0.05
+`}
+</CodeExample>
+
+### 5.1.3 Topic and Service Remapping
+
+Remapping allows you to connect nodes without modifying code:
+
+<CodeExample language="python" filename="remapping_launch.py" difficulty="intermediate">
+{`from launch import LaunchDescription
+from launch_ros.actions import Node
+
+def generate_launch_description():
+    return LaunchDescription([
+        # Camera node publishes to /camera/image_raw
+        Node(
+            package='usb_cam',
+            executable='usb_cam_node',
+            name='front_camera'
+        ),
+
+        # Object detector expects /image topic
+        # Remap: /image → /camera/image_raw
+        Node(
+            package='vision_pkg',
+            executable='object_detector',
+            name='detector',
+            remappings=[
+                ('/image', '/camera/image_raw'),
+                ('/detections', '/robot/detected_objects')
+            ]
+        ),
+    ])
+`}
+</CodeExample>
+
+**Why Remapping?**
+- ✅ Integrate third-party packages without code changes
+- ✅ Run multiple instances of same node with different topics
+- ✅ Create clear topic hierarchies (`/robot/sensors/camera1`)
+
+### 5.1.4 Launch Arguments for Configuration
+
+Make launch files configurable with arguments:
+
+<CodeExample language="python" filename="configurable_launch.py" difficulty="advanced" estimatedTime={20}>
+{`from launch import LaunchDescription
+from launch.actions import DeclareLaunchArgument
+from launch.substitutions import LaunchConfiguration
+from launch_ros.actions import Node
+
+def generate_launch_description():
+    # Declare launch arguments
+    use_sim_time_arg = DeclareLaunchArgument(
+        'use_sim_time',
+        default_value='false',
+        description='Use simulation time if true'
+    )
+
+    robot_name_arg = DeclareLaunchArgument(
+        'robot_name',
+        default_value='robot1',
+        description='Name of the robot instance'
+    )
+
+    # Access argument values with LaunchConfiguration
+    use_sim_time = LaunchConfiguration('use_sim_time')
+    robot_name = LaunchConfiguration('robot_name')
+
+    return LaunchDescription([
+        use_sim_time_arg,
+        robot_name_arg,
+
+        Node(
+            package='nav2_bringup',
+            executable='navigation_node',
+            name='navigator',
+            parameters=[{
+                'use_sim_time': use_sim_time,
+                'robot_name': robot_name
+            }],
+            output='screen'
+        ),
+    ])
+`}
+</CodeExample>
+
+**Using Launch Arguments:**
+
+<CodeExample language="bash" showLineNumbers={false}>
+{`# Use default values
+ros2 launch my_robot_pkg configurable_launch.py
+
+# Override arguments
+ros2 launch my_robot_pkg configurable_launch.py \
+  use_sim_time:=true \
+  robot_name:=atlas
+
+# View available arguments
+ros2 launch my_robot_pkg configurable_launch.py --show-args
+`}
+</CodeExample>
+
+<ConceptCallout type="tip" title="Launch File Best Practices">
+
+1. **Use YAML for parameters**: Separate configuration from code
+2. **Add descriptions to arguments**: Help users understand options
+3. **Set sensible defaults**: Launch file should work with no arguments
+4. **Group related nodes**: Use namespaces (`namespace='robot1'`)
+5. **Include other launch files**: Modularize complex systems
+
+Example of including launch files:
+```python
+from launch.actions import IncludeLaunchDescription
+from launch.launch_description_sources import PythonLaunchDescriptionSource
+
+IncludeLaunchDescription(
+    PythonLaunchDescriptionSource([
+        os.path.join(pkg_dir, 'launch', 'sensors.launch.py')
+    ])
+)
+```
+
+</ConceptCallout>
+
+## 5.2 ROS 2 Package Structure
+
+A **ROS 2 package** is an organizational unit containing code, dependencies, and resources.
+
+### 5.2.1 Standard Package Layout
+
+<CodeExample language="bash" showLineNumbers={false}>
+{`my_robot_pkg/
+├── package.xml           # Package metadata and dependencies
+├── setup.py              # Python package configuration
+├── setup.cfg             # Python build configuration
+├── resource/             # Package marker file
+│   └── my_robot_pkg
+├── my_robot_pkg/         # Python source code
+│   ├── __init__.py
+│   ├── temperature_sensor.py
+│   ├── temperature_monitor.py
+│   └── utils.py
+├── launch/               # Launch files
+│   ├── sensors.launch.py
+│   └── full_system.launch.py
+├── config/               # YAML parameter files
+│   ├── robot_params.yaml
+│   └── sensor_config.yaml
+├── urdf/                 # Robot description files
+│   ├── robot.urdf
+│   └── robot.urdf.xacro
+├── rviz/                 # RViz configuration
+│   └── default.rviz
+└── test/                 # Unit tests
+    ├── test_sensor.py
+    └── test_monitor.py
+`}
+</CodeExample>
+
+### 5.2.2 package.xml: Package Metadata
+
+<CodeExample language="xml" filename="package.xml" difficulty="intermediate">
+{`<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>my_robot_pkg</name>
+  <version>1.0.0</version>
+  <description>Temperature monitoring system for robotics</description>
+  <maintainer email="your.email@example.com">Your Name</maintainer>
+  <license>MIT</license>
+
+  <!-- Build tool -->
+  <buildtool_depend>ament_python</buildtool_depend>
+
+  <!-- Runtime dependencies -->
+  <depend>rclpy</depend>
+  <depend>std_msgs</depend>
+  <depend>sensor_msgs</depend>
+  <depend>geometry_msgs</depend>
+
+  <!-- Test dependencies -->
+  <test_depend>ament_copyright</test_depend>
+  <test_depend>ament_flake8</test_depend>
+  <test_depend>ament_pep257</test_depend>
+  <test_depend>python3-pytest</test_depend>
+
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>
+`}
+</CodeExample>
+
+**Dependency Types**:
+- **`<buildtool_depend>`**: Build tools (ament_python, ament_cmake)
+- **`<depend>`**: Build + runtime dependencies (rclpy, sensor_msgs)
+- **`<build_depend>`**: Build-only dependencies (code generators)
+- **`<exec_depend>`**: Runtime-only dependencies (launch files)
+- **`<test_depend>`**: Testing dependencies (pytest, linters)
+
+### 5.2.3 setup.py: Python Package Configuration
+
+<CodeExample language="python" filename="setup.py" difficulty="intermediate">
+{`from setuptools import setup
+import os
+from glob import glob
+
+package_name = 'my_robot_pkg'
+
+setup(
+    name=package_name,
+    version='1.0.0',
+    packages=[package_name],
+    data_files=[
+        # Install package marker
+        ('share/ament_index/resource_index/packages',
+            ['resource/' + package_name]),
+
+        # Install package.xml
+        ('share/' + package_name, ['package.xml']),
+
+        # Install launch files
+        (os.path.join('share', package_name, 'launch'),
+            glob('launch/*.launch.py')),
+
+        # Install config files
+        (os.path.join('share', package_name, 'config'),
+            glob('config/*.yaml')),
+
+        # Install URDF files
+        (os.path.join('share', package_name, 'urdf'),
+            glob('urdf/*.urdf') + glob('urdf/*.xacro')),
+    ],
+    install_requires=['setuptools'],
+    zip_safe=True,
+    maintainer='Your Name',
+    maintainer_email='your.email@example.com',
+    description='Temperature monitoring system for robotics',
+    license='MIT',
+    tests_require=['pytest'],
+    entry_points={
+        'console_scripts': [
+            # Executable name = package.module:function
+            'temperature_sensor = my_robot_pkg.temperature_sensor:main',
+            'temperature_monitor = my_robot_pkg.temperature_monitor:main',
+        ],
+    },
+)
+`}
+</CodeExample>
+
+**`entry_points` Explained**:
+- Maps executable names to Python functions
+- `'temperature_sensor'` becomes a command you can run with `ros2 run`
+- Points to `main()` function in `my_robot_pkg/temperature_sensor.py`
+
+## 5.3 Colcon: The ROS 2 Build System
+
+**Colcon** (collective construction) is the build tool for ROS 2 packages.
+
+### 5.3.1 Workspace Structure
+
+<CodeExample language="bash" showLineNumbers={false}>
+{`ros2_ws/                 # Workspace root
+├── src/                  # Source space (your packages)
+│   ├── my_robot_pkg/
+│   └── vision_pkg/
+├── build/                # Build artifacts (auto-generated)
+├── install/              # Installed files (auto-generated)
+└── log/                  # Build logs (auto-generated)
+`}
+</CodeExample>
+
+### 5.3.2 Building Packages with Colcon
+
+<CodeExample language="bash" showLineNumbers={false}>
+{`# Navigate to workspace root
+cd ~/ros2_ws
+
+# Build all packages
+colcon build
+
+# Build specific package
+colcon build --packages-select my_robot_pkg
+
+# Build with debug symbols (for gdb debugging)
+colcon build --cmake-args -DCMAKE_BUILD_TYPE=Debug
+
+# Build with verbose output
+colcon build --event-handlers console_direct+
+
+# Clean build (remove build/install directories)
+rm -rf build install log
+colcon build
+`}
+</CodeExample>
+
+**After building, source the workspace:**
+
+<CodeExample language="bash" showLineNumbers={false}>
+{`# Source install space
+source ~/ros2_ws/install/setup.bash
+
+# Verify package is found
+ros2 pkg list | grep my_robot_pkg
+
+# Run nodes from package
+ros2 run my_robot_pkg temperature_sensor
+ros2 launch my_robot_pkg sensors.launch.py
+`}
+</CodeExample>
+
+<ConceptCallout type="warning" title="Overlay vs. Underlay Workspaces">
+
+**Underlay**: ROS 2 installation (`/opt/ros/humble`)
+```bash
+source /opt/ros/humble/setup.bash
+```
+
+**Overlay**: Your workspace (`~/ros2_ws`)
+```bash
+source ~/ros2_ws/install/setup.bash
+```
+
+When you source an overlay, it extends the underlay. Your packages "override" system packages with the same name.
+
+**Best Practice**: Add both to `~/.bashrc`:
+```bash
+source /opt/ros/humble/setup.bash
+source ~/ros2_ws/install/setup.bash
+```
+
+</ConceptCallout>
+
+### 5.3.3 Dependency Management with rosdep
+
+**rosdep** installs package dependencies automatically:
+
+<CodeExample language="bash" showLineNumbers={false}>
+{`# Initialize rosdep (once per system)
+sudo rosdep init
+rosdep update
+
+# Install dependencies for all packages in workspace
+cd ~/ros2_ws
+rosdep install --from-paths src --ignore-src -r -y
+
+# Explanation:
+# --from-paths src: Search src/ for package.xml files
+# --ignore-src: Don't try to install packages from src/
+# -r: Continue despite errors
+# -y: Auto-confirm installations
+`}
+</CodeExample>
+
+## 5.4 Complete Package Example
+
+Let's create a full package with multiple nodes, launch files, and configuration.
+
+### 5.4.1 Creating a New Package
+
+<CodeExample language="bash" showLineNumbers={false}>
+{`# Create workspace
+mkdir -p ~/ros2_ws/src
+cd ~/ros2_ws/src
+
+# Create package
+ros2 pkg create --build-type ament_python \
+  --dependencies rclpy std_msgs sensor_msgs \
+  robot_monitor
+
+# Directory structure created:
+# robot_monitor/
+# ├── package.xml
+# ├── setup.py
+# ├── setup.cfg
+# ├── resource/robot_monitor
+# └── robot_monitor/__init__.py
+`}
+</CodeExample>
+
+### 5.4.2 Adding Nodes
+
+Create `robot_monitor/sensor_node.py`:
+
+<CodeExample language="python" filename="sensor_node.py" difficulty="intermediate">
+{`import rclpy
+from rclpy.node import Node
+from std_msgs.msg import Float32
+import random
+
+class SensorNode(Node):
+    def __init__(self):
+        super().__init__('sensor_node')
+
+        self.declare_parameter('sensor_name', 'default_sensor')
+        self.declare_parameter('publish_rate', 1.0)
+
+        sensor_name = self.get_parameter('sensor_name').value
+        rate = self.get_parameter('publish_rate').value
+
+        self.publisher_ = self.create_publisher(Float32, 'sensor_data', 10)
+        self.timer = self.create_timer(1.0 / rate, self.timer_callback)
+
+        self.get_logger().info(f'Sensor "{sensor_name}" started at {rate} Hz')
+
+    def timer_callback(self):
+        msg = Float32()
+        msg.data = 20.0 + random.uniform(-5.0, 5.0)
+        self.publisher_.publish(msg)
+
+def main(args=None):
+    rclpy.init(args=args)
+    node = SensorNode()
+    rclpy.spin(node)
+    node.destroy_node()
+    rclpy.shutdown()
+
+if __name__ == '__main__':
+    main()
+`}
+</CodeExample>
+
+### 5.4.3 Updating setup.py
+
+<CodeExample language="python" filename="setup.py" difficulty="beginner">
+{`# Add to entry_points:
+entry_points={
+    'console_scripts': [
+        'sensor_node = robot_monitor.sensor_node:main',
+        'monitor_node = robot_monitor.monitor_node:main',
+    ],
+},
+`}
+</CodeExample>
+
+### 5.4.4 Creating Launch File
+
+Create `launch/system.launch.py`:
+
+<CodeExample language="python" filename="system.launch.py" difficulty="advanced">
+{`import os
+from ament_index_python.packages import get_package_share_directory
+from launch import LaunchDescription
+from launch.actions import DeclareLaunchArgument
+from launch.substitutions import LaunchConfiguration
+from launch_ros.actions import Node
+
+def generate_launch_description():
+    # Get config file path
+    config_dir = os.path.join(
+        get_package_share_directory('robot_monitor'),
+        'config'
+    )
+
+    return LaunchDescription([
+        # Launch argument
+        DeclareLaunchArgument(
+            'use_sim_time',
+            default_value='false',
+            description='Use simulation time'
+        ),
+
+        # Sensor node
+        Node(
+            package='robot_monitor',
+            executable='sensor_node',
+            name='temperature_sensor',
+            parameters=[{
+                'sensor_name': 'temp_sensor_1',
+                'publish_rate': 2.0,
+                'use_sim_time': LaunchConfiguration('use_sim_time')
+            }],
+            output='screen'
+        ),
+
+        # Monitor node
+        Node(
+            package='robot_monitor',
+            executable='monitor_node',
+            name='data_monitor',
+            parameters=[{
+                'threshold': 30.0,
+                'use_sim_time': LaunchConfiguration('use_sim_time')
+            }],
+            output='screen'
+        ),
+    ])
+`}
+</CodeExample>
+
+### 5.4.5 Building and Testing
+
+<CodeExample language="bash" showLineNumbers={false}>
+{`# Build package
+cd ~/ros2_ws
+colcon build --packages-select robot_monitor
+
+# Source workspace
+source install/setup.bash
+
+# Test individual node
+ros2 run robot_monitor sensor_node --ros-args -p sensor_name:=test
+
+# Launch full system
+ros2 launch robot_monitor system.launch.py
+
+# Override launch argument
+ros2 launch robot_monitor system.launch.py use_sim_time:=true
+`}
+</CodeExample>
+
+## 5.5 Hands-On Exercise: Complete ROS 2 Package
+
+<ExerciseBlock
+  title="Multi-Node Robot Monitor Package"
+  difficulty="advanced"
+  estimatedTime={90}
+  objectives={[
+    "Create a ROS 2 package with proper directory structure and dependencies",
+    "Implement 3 nodes: sensor publisher, data aggregator, alert system",
+    "Create launch file that starts all nodes with configurable parameters",
+    "Build package with colcon and verify deployment"
+  ]}
+  hints={[
+    "Use ros2 pkg create to generate package scaffold",
+    "Add all nodes to setup.py entry_points",
+    "Use YAML config file for threshold parameters",
+    "Test each node individually before creating launch file",
+    "Check dependencies with ros2 pkg list after building"
+  ]}
+>
+
+### Problem Statement
+
+Create a complete ROS 2 package for a robot monitoring system with:
+1. **Sensor node**: Publishes simulated battery, temperature, and CPU metrics
+2. **Aggregator node**: Subscribes to all sensors, computes statistics
+3. **Alert node**: Triggers warnings when metrics exceed thresholds
+
+### Requirements
+
+**Package Structure**:
+```
+robot_health_monitor/
+├── package.xml (dependencies: rclpy, std_msgs, diagnostic_msgs)
+├── setup.py (3 entry points)
+├── robot_health_monitor/
+│   ├── battery_sensor.py
+│   ├── aggregator.py
+│   └── alert_system.py
+├── launch/
+│   └── health_monitor.launch.py
+├── config/
+│   └── thresholds.yaml
+```
+
+**Node Specifications**:
+- `battery_sensor`: Publish Float32 to `/battery_level` (0-100%) at 1 Hz
+- `aggregator`: Subscribe to `/battery_level`, `/temperature`, `/cpu_usage`, publish average to `/system_health`
+- `alert_system`: Subscribe to metrics, log WARN if battery < 20%, temperature > 80°C
+
+**Launch File**:
+- Start all 3 nodes
+- Load `thresholds.yaml` for alert_system
+- Accept `log_level` argument (default: INFO)
+
+### Testing
+
+```bash
+# Build
+colcon build --packages-select robot_health_monitor
+source install/setup.bash
+
+# Launch system
+ros2 launch robot_health_monitor health_monitor.launch.py
+
+# Verify topics
+ros2 topic list  # Should show /battery_level, /system_health, etc.
+ros2 topic hz /battery_level  # Should show ~1 Hz
+
+# Check alerts appear when battery drops below 20%
+```
+
+### Deliverable
+
+1. Complete package with all files
+2. Screenshot of `colcon build` success
+3. Screenshot of all 3 nodes running via launch file with visible log output
+
+</ExerciseBlock>
+
+## Key Takeaways
+
+<div className="key-takeaways">
+
+### ✓ Core Concepts Mastered
+
+- **Launch files orchestrate multi-node systems** using Python syntax with Node(), parameters, remapping, and arguments
+- **Python packages follow standard structure** with package.xml (dependencies), setup.py (entry points), and organized directories (launch, config, urdf)
+- **colcon builds ROS 2 workspaces** compiling packages and creating install spaces that extend the ROS 2 underlay
+- **rosdep installs package dependencies** automatically from package.xml declarations
+- **Overlay workspaces extend underlays** allowing custom packages to override system packages when sourced
+- **Launch arguments enable configuration** through DeclareLaunchArgument and LaunchConfiguration for runtime flexibility
+- **Best practices separate code and configuration** using YAML files, modular launch includes, and proper dependency declarations
+
+</div>
+
+## Module 1 Complete! 🎉
+
+**Congratulations!** You've completed Module 1: The Robotic Nervous System (ROS 2).
+
+**What You've Learned**:
+- **Chapter 1**: ROS 2 architecture, computational graphs, DDS middleware
+- **Chapter 2**: Publishers, subscribers, topics, QoS policies
+- **Chapter 3**: Services, actions, parameters, AI-ROS integration
+- **Chapter 4**: URDF robot modeling, links, joints, RViz2 visualization
+- **Chapter 5**: Launch files, packages, colcon build system
+
+**Total Time**: ~475 minutes (7.9 hours)
+
+**Next Steps**:
+1. **Review**: Revisit key takeaways from each chapter
+2. **Practice**: Complete any unfinished exercises
+3. **Module 2 Preview**: Digital Twin and Gazebo Simulation (Weeks 6-7)
+
+**Assessment**: Before continuing, ensure you can:
+- ✅ Create a ROS 2 package with multiple nodes
+- ✅ Write launch files with parameters and remapping
+- ✅ Build and deploy packages using colcon
+- ✅ Debug multi-node systems using ROS 2 CLI tools
+
+---
+
+**Next Module**: [Module 2: Digital Twin Simulation](../module-2-digital-twin/index)

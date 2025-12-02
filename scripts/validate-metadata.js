@@ -13,7 +13,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Load the JSON Schema
-const schemaPath = path.join(__dirname, '../contracts/chapter-metadata-schema.json');
+const schemaPath = path.join(__dirname, '../.specify/schemas/chapter-frontmatter.schema.json');
 const schema = JSON.parse(fs.readFileSync(schemaPath, 'utf8'));
 
 // Initialize Ajv

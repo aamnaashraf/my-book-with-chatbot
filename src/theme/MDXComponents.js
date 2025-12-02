@@ -16,9 +16,15 @@ import MDXComponents from '@theme-original/MDXComponents';
 // Import custom components for chapter template system
 import LearningObjectives from '@site/src/components/LearningObjectives';
 import Prerequisites from '@site/src/components/Prerequisites';
+
+// Import Module 1 ROS 2 educational components (Feature: 005-module-1-ros2-chapters)
+import CodeExample from '@site/src/components/learning/CodeExample';
+import ExerciseBlock from '@site/src/components/learning/ExerciseBlock';
+import ConceptCallout from '@site/src/components/learning/ConceptCallout';
+import AssessmentChecklist from '@site/src/components/learning/AssessmentChecklist';
+
 // These components will be registered as they are created in subsequent phases
 // import KeyTakeaways from '@site/src/components/KeyTakeaways';
-// import ExerciseBlock from '@site/src/components/ExerciseBlock';
 
 /**
  * Component mapping for MDX
@@ -46,7 +52,13 @@ export default {
   // Custom chapter template components
   LearningObjectives,
   Prerequisites,
+
+  // Module 1 ROS 2 educational components
+  CodeExample,
+  ExerciseBlock,
+  ConceptCallout,
+  AssessmentChecklist,
+
   // Uncomment these as components are created in subsequent phases
   // KeyTakeaways,
-  // ExerciseBlock,
 };

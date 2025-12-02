@@ -32,7 +32,14 @@ const sidebars = {
       label: 'Module 1: ROS 2 (Weeks 3-5)',
       collapsible: true,
       collapsed: false,
-      items: ['module-1-ros2/index'],
+      items: [
+        'module-1-ros2/index',
+        'module-1-ros2/chapter-1-intro-ros2',
+        'module-1-ros2/chapter-2-nodes-topics',
+        'module-1-ros2/chapter-3-services-actions-parameters',
+        'module-1-ros2/chapter-4-urdf-robot-modeling',
+        'module-1-ros2/chapter-5-launch-files-packages',
+      ],
     },
     {
       type: 'category',

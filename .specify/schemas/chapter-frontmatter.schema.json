@@ -1,0 +1,102 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/ameen-alam/Physical-AI-Humanoid-Robotics-Textbook/schemas/chapter-frontmatter.schema.json",
+  "title": "Chapter Front Matter Schema",
+  "description": "Metadata schema for chapter MDX files in the Physical AI & Humanoid Robotics textbook",
+  "type": "object",
+  "required": [
+    "title",
+    "description",
+    "keywords",
+    "sidebar_position",
+    "learning_objectives",
+    "prerequisites",
+    "estimated_time",
+    "content_type",
+    "difficulty"
+  ],
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Chapter title (e.g., 'Chapter 1: Introduction to ROS 2')",
+      "minLength": 10,
+      "maxLength": 80
+    },
+    "description": {
+      "type": "string",
+      "description": "Brief description for SEO and previews",
+      "minLength": 10,
+      "maxLength": 160
+    },
+    "keywords": {
+      "type": "array",
+      "description": "3-10 keywords for search and indexing",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 3,
+      "maxItems": 10
+    },
+    "sidebar_position": {
+      "type": "integer",
+      "description": "Position in sidebar navigation (1, 2, 3...)",
+      "minimum": 1
+    },
+    "learning_objectives": {
+      "type": "array",
+      "description": "2-5 learning objectives using Bloom's taxonomy verbs",
+      "items": {
+        "type": "string",
+        "pattern": "^(Understand|Apply|Demonstrate|Implement|Build|Create|Design|Evaluate|Analyze)"
+      },
+      "minItems": 2,
+      "maxItems": 5
+    },
+    "prerequisites": {
+      "type": "array",
+      "description": "Paths to prerequisite chapters (e.g., 'docs/module-1-ros2/chapter-1-intro') or empty array []",
+      "items": {
+        "type": "string"
+      }
+    },
+    "estimated_time": {
+      "type": "integer",
+      "description": "Estimated completion time in minutes (multiple of 5)",
+      "minimum": 5,
+      "multipleOf": 5
+    },
+    "content_type": {
+      "type": "string",
+      "description": "Type of content",
+      "enum": ["tutorial", "concept", "hands-on-lab", "reference"]
+    },
+    "difficulty": {
+      "type": "string",
+      "description": "Difficulty level",
+      "enum": ["beginner", "intermediate", "advanced"]
+    },
+    "tags": {
+      "type": "array",
+      "description": "Optional tags for filtering (e.g., ['ros2', 'python', 'hands-on'])",
+      "items": {
+        "type": "string"
+      }
+    },
+    "draft": {
+      "type": "boolean",
+      "description": "If true, hide from production builds"
+    },
+    "ros2_distribution": {
+      "type": "string",
+      "description": "ROS 2 distribution (default: 'humble')",
+      "enum": ["humble"],
+      "default": "humble"
+    },
+    "chapter_number": {
+      "type": "integer",
+      "description": "Chapter number within module (1, 2, 3, 4, 5)",
+      "minimum": 1,
+      "maximum": 5
+    }
+  }
+}
