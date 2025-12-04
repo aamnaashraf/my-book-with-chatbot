@@ -16,17 +16,7 @@ const sidebars = {
   // Main tutorial sidebar with nested collapsible categories
   tutorialSidebar: [
     'intro',
-    {
-      type: 'category',
-      label: 'Setup Guides',
-      collapsible: true,
-      collapsed: false,
-      items: [
-        'setup/workstation',
-        'setup/edge-kit',
-        'setup/cloud',
-      ],
-    },
+   
     {
       type: 'category',
       label: 'Module 1: ROS 2 (Weeks 3-5)',
@@ -38,7 +28,6 @@ const sidebars = {
         'module-1-ros2/chapter-2-nodes-topics',
         'module-1-ros2/chapter-3-services-actions-parameters',
         'module-1-ros2/chapter-4-urdf-robot-modeling',
-        'module-1-ros2/chapter-5-launch-files-packages',
       ],
     },
     {

@@ -33,7 +33,10 @@ export default function Home(): JSX.Element {
         <div className="container" style={{marginTop: '3rem', marginBottom: '3rem'}}>
           <div className="homepage-container">
             <div>
-              <h2>Course Modules</h2>
+               <h2 className="modules-title">Explore the 4-Module Learning Path</h2>
+    <p className="modules-subtitle">
+      A hands-on curriculum — from ROS 2 basics to VLA & humanoid integration.
+    </p>
               <div className="module-grid">
                 {modules.map((module, index) => (
                   <ModuleCard key={index} {...module} />

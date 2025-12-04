@@ -2,8 +2,9 @@
 
 > Comprehensive 13-week textbook for industry practitioners: ROS 2, Digital Twin (Gazebo/Unity), NVIDIA Isaac Sim, and Vision-Language-Action models.
 
-[![Deploy to GitHub Pages](https://github.com/Ameen-Alam/Physical-AI-Humanoid-Robotics-Textbook/actions/workflows/deploy.yml/badge.svg)](https://github.com/Ameen-Alam/Physical-AI-Humanoid-Robotics-Textbook/actions/workflows/deploy.yml)
-[![Build Validation](https://github.com/Ameen-Alam/Physical-AI-Humanoid-Robotics-Textbook/actions/workflows/build-validation.yml/badge.svg)](https://github.com/Ameen-Alam/Physical-AI-Humanoid-Robotics-Textbook/actions/workflows/build-validation.yml)
+
+[![Deploy](https://github.com/aamnaashraf/Physical-AI-Humanoid-Robotics/actions/workflows/deploy.yml/badge.svg)](https://github.com/aamnaashraf/Physical-AI-Humanoid-Robotics/actions/workflows/deploy.yml)  
+[![Build](https://github.com/aamnaashraf/Physical-AI-Humanoid-Robotics/actions/workflows/build-validation.yml/badge.svg)](https://github.com/aamnaashraf/Physical-AI-Humanoid-Robotics/actions/workflows/build-validation.yml)
 
 ## Overview
 
@@ -38,8 +39,8 @@ Choose one of three hardware configurations:
 
 ```bash
 # Clone the repository
-git clone https://github.com/Ameen-Alam/Physical-AI-Humanoid-Robotics-Textbook.git
-cd Physical-AI-Humanoid-Robotics-Textbook
+git clone https://github.com/aamnaasraf/Physical-AI-Humanoid-Robotics
+cd Physical-AI-Humanoid-Robotics
 
 # Install dependencies
 npm install
@@ -144,13 +145,12 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - Built with [Docusaurus](https://docusaurus.io/) by Meta
 - Developed using [Claude Code](https://claude.ai/code) AI Assistant
-- Following [Spec-Kit Plus](https://github.com/Ameen-Alam/spec-kit-plus) methodology
 - Inspired by industry best practices in robotics education
 
 ## Support
 
-- **Issues**: [GitHub Issues](https://github.com/Ameen-Alam/Physical-AI-Humanoid-Robotics-Textbook/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/Ameen-Alam/Physical-AI-Humanoid-Robotics-Textbook/discussions)
+- **Issues**: [GitHub Issues](https://github.com/aamnaasraf/Physical-AI-Humanoid-Robotics/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/aamnaasraf/Physical-AI-Humanoid-Robotics/discussions)
 - **Documentation**: [Quickstart Guide](specs/001-book-master-plan/quickstart.md)
 
 ---

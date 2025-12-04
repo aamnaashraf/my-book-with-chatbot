@@ -17,10 +17,13 @@ export default function ModuleCard({
   learningOutcomes,
 }: ModuleCardProps): JSX.Element {
   return (
-    <Link to={`/docs/${id}/`} className="module-card" style={{textDecoration: 'none'}}>
+    <Link to={`/docs/${id}/`} className="module-card">
       <div className="week-range">{weekRange}</div>
-      <h3>{title}</h3>
-      <p className="description">{description}</p>
+
+      <h3 className="module-title">{title}</h3>
+
+      <p className="module-description">{description}</p>
+
       <div className="learning-outcomes">
         <strong>Learning Outcomes:</strong>
         <ul>
@@ -32,3 +35,4 @@ export default function ModuleCard({
     </Link>
   );
 }
+

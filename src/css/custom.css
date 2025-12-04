@@ -12,11 +12,11 @@
 }
 
 :root {
-  --ifm-hero-background: #407b83; /* light mode hero background */
+  --ifm-hero-background: #49a792; /* light mode hero background */
 }
 
 [data-theme='dark'] {
-  --ifm-hero-background: #0a6d5c; /* dark mode hero background */
+  --ifm-hero-background: #076158; /* dark mode hero background */
 }
 
 
@@ -57,6 +57,12 @@
   border-color: var(--ifm-color-emphasis-500);
   background-color: var(--ifm-color-emphasis-100);
 }
+
+
+
+
+
+
 
 
 .module-card:hover {
@@ -105,10 +111,12 @@
   gap: 1.5rem;
 }
 
+
+
 .quick-links-sidebar {
   padding: 1.5rem;
-  border-radius: 8px;
-  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 16px;
+  border: 2px solid var(--ifm-color-emphasis-300);
   background-color: var(--ifm-background-surface-color);
 }
 /* Dark mode for quick links sidebar */
@@ -142,6 +150,9 @@
 .quick-links-sidebar a:hover {
   text-decoration: underline;
 }
+
+
+
 
 /* Recent updates section */
 
