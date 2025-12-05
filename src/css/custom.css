@@ -47,6 +47,49 @@
 
 
 /* ===== Highlights section styling ===== */
+
+
+.highlights-box {
+  padding: 1rem 0.8rem; /* compact for small screens */
+  border-radius: 10px;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  background-color: var(--ifm-background-surface-color);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+/* Hover effect */
+.highlights-box:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 12px 24px rgba(0, 255, 212, 0.15); /* tealish glow for hover */
+  background: linear-gradient(135deg, rgba(0, 255, 212, 0.02), var(--ifm-background-surface-color));
+}
+
+/* Dark mode */
+[data-theme='dark'] .highlights-box {
+  border-color: var(--ifm-color-emphasis-500);
+  background-color: var(--ifm-color-emphasis-100);
+  box-shadow: 0 4px 12px rgba(0, 255, 212, 0.08);
+}
+
+[data-theme='dark'] .highlights-box:hover {
+  box-shadow: 0 12px 24px rgba(0, 255, 212, 0.3);
+  background: linear-gradient(135deg, rgba(0, 255, 212, 0.05), var(--ifm-color-emphasis-100));
+}
+
+/* Responsive for small screens */
+@media (max-width: 640px) {
+  .highlights-box {
+    padding: 0.8rem 0.6rem;
+    margin-top: 0.8rem;
+    margin-bottom: 0.8rem;
+  }
+}
+
+
 .highlights-section {
   margin-top: 1.6rem;
   margin-bottom: 2.4rem;

@@ -35,13 +35,15 @@ export default function Home(): JSX.Element {
         <div className="highlights-inner">
           <div className="highlights-intro">
             <h3 className="highlights-title text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-cyan-500">
-  Why this textbook? 🚀
+   Why this textbook?🚀
 </h3>
 
- <p className="highlights-sub-upgraded">
-  A <span className="highlight-keyword">practical and structured pathway</span> through <span className="highlight-keyword">Physical AI & Humanoid Robotics</span>, designed to take you from <span className="highlight-keyword">fundamentals</span> to <span className="highlight-keyword">real-world applications</span>.  
-  Each module is carefully curated to include <span className="highlight-keyword">hands-on labs</span>, <span className="highlight-keyword">interactive simulations</span>, and <span className="highlight-keyword">industry-relevant projects</span>, so you can learn by doing while building a strong foundation for advanced humanoid robotics development.
-</p>
+ <div className="highlights-box">
+  <p className="highlights-sub-upgraded">
+    A <span className="highlight-keyword">practical and structured pathway</span> through <span className="highlight-keyword">Physical AI & Humanoid Robotics</span>, designed to take you from <span className="highlight-keyword">fundamentals</span> to <span className="highlight-keyword">real-world applications</span>.  
+    Each module is carefully curated to include <span className="highlight-keyword">hands-on labs</span>, <span className="highlight-keyword">interactive simulations</span>, and <span className="highlight-keyword">industry-relevant projects</span>, so you can learn by doing while building a strong foundation for advanced humanoid robotics development.
+  </p>
+</div>
 
 
 
