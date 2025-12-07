@@ -36,11 +36,13 @@ const ChatWidget: React.FC = () => {
     setLoading(true);
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ query: trimmedInput, software: "Python", hardware: "NVIDIA Jetson" }),
-      });
+     const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
+const response = await fetch(`${backendUrl}/chat`, {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ query: trimmedInput, software: "Python", hardware: "NVIDIA Jetson" }),
+});
 
       const data = await response.json();
       console.log("Backend response:", data); // Debug backend response
