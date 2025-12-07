@@ -8,6 +8,8 @@ import QuickLinks from '@site/src/components/QuickLinks';
 import InteractiveSection from '@site/src/components/InteractiveSection';
 import RecentUpdates from '@site/src/components/RecentUpdates';
 import modules from '@site/src/data/modules.json';
+import ChatWidget from '@site/src/components/ChatWidget';
+
 
 export default function Home(): JSX.Element {
   const {siteConfig} = useDocusaurusContext();
@@ -98,6 +100,7 @@ export default function Home(): JSX.Element {
           <InteractiveSection />
         </div>
       </main>
+      <ChatWidget />
     </Layout>
   );
 }
