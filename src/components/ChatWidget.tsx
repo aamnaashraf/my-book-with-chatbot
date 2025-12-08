@@ -35,22 +35,21 @@ const ChatWidgetInner: React.FC = () => {
     setMessages((prev) => [...prev, userMessage]);
     setInput("");
     setLoading(true);
-try {
-    // Backend URL using process.env for Docusaurus SSR compatibility
-    const backendUrl =
-      (typeof window !== "undefined" && process.env.VITE_BACKEND_URL) ||
-      "http://localhost:8000"; // fallback for local dev
 
-    const response = await fetch(`${backendUrl}/chat`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        query: trimmedInput,
-        software: "Python",
-        hardware: "NVIDIA Jetson",
-      }),
-    });
+    try {
+      // Backend URL — safe in browser only
+      const backendUrl =
+        import.meta.env.VITE_BACKEND_URL || "http://localhost:8000";
 
+      const response = await fetch(`${backendUrl}/chat`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          query: trimmedInput,
+          software: "Python",
+          hardware: "NVIDIA Jetson",
+        }),
+      });
 
       const data = await response.json();
       const aiText =
@@ -73,7 +72,6 @@ try {
     if (e.key === "Enter") sendMessage();
   };
 
-  // Theme colors (client-side only)
   const isDark =
     typeof window !== "undefined" &&
     window.matchMedia &&
@@ -128,7 +126,6 @@ try {
             overflow: "hidden",
           }}
         >
-          {/* Header */}
           <div
             style={{
               backgroundColor: "#007bff",
@@ -158,7 +155,6 @@ try {
             </button>
           </div>
 
-          {/* Messages */}
           <div
             style={{
               flex: 1,
@@ -188,7 +184,11 @@ try {
             ))}
             {loading && (
               <div
-                style={{ alignSelf: "flex-start", fontStyle: "italic", color: textColor }}
+                style={{
+                  alignSelf: "flex-start",
+                  fontStyle: "italic",
+                  color: textColor,
+                }}
               >
                 AI is typing...
               </div>
@@ -196,8 +196,12 @@ try {
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Input */}
-          <div style={{ display: "flex", borderTop: `1px solid ${isDark ? "#444" : "#ccc"}` }}>
+          <div
+            style={{
+              display: "flex",
+              borderTop: `1px solid ${isDark ? "#444" : "#ccc"}`,
+            }}
+          >
             <input
               ref={inputRef}
               type="text"
@@ -238,7 +242,6 @@ try {
   );
 };
 
-// Wrap ChatWidget in BrowserOnly for Docusaurus SSG compatibility
 const ChatWidget: React.FC = () => {
   return (
     <BrowserOnly fallback={<div />}>
@@ -248,6 +251,7 @@ const ChatWidget: React.FC = () => {
 };
 
 export default ChatWidget;
+
 
 
 
