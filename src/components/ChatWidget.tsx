@@ -1,12 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
-import BrowserOnly from "@docusaurus/BrowserOnly";
 
 interface Message {
   sender: "user" | "ai";
   text: string;
 }
 
-const ChatWidgetInner: React.FC = () => {
+const ChatWidget: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
@@ -37,11 +36,7 @@ const ChatWidgetInner: React.FC = () => {
     setLoading(true);
 
     try {
-      // Backend URL — safe in browser only
-      const backendUrl =
-        import.meta.env.VITE_BACKEND_URL || "http://localhost:8000";
-
-      const response = await fetch(`${backendUrl}/chat`, {
+      const response = await fetch("https://backend-1-eftt.onrender.com/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -52,8 +47,9 @@ const ChatWidgetInner: React.FC = () => {
       });
 
       const data = await response.json();
-      const aiText =
-        data?.answer || "Sorry, I could not get a response from backend.";
+      console.log("Backend response:", data); // Debug backend response
+
+      const aiText = data?.answer || "Sorry, I could not get a response from backend.";
       const aiMessage: Message = { sender: "ai", text: aiText };
       setMessages((prev) => [...prev, aiMessage]);
     } catch (error) {
@@ -72,11 +68,9 @@ const ChatWidgetInner: React.FC = () => {
     if (e.key === "Enter") sendMessage();
   };
 
+  // Determine theme colors
   const isDark =
-    typeof window !== "undefined" &&
-    window.matchMedia &&
-    window.matchMedia("(prefers-color-scheme: dark)").matches;
-
+    window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
   const bgColor = isDark ? "#1e1e1e" : "#fff";
   const userColor = isDark ? "#3a3a3a" : "#DCF8C6";
   const aiColor = isDark ? "#2c2c2c" : "#f1f0f0";
@@ -126,6 +120,7 @@ const ChatWidgetInner: React.FC = () => {
             overflow: "hidden",
           }}
         >
+          {/* Header */}
           <div
             style={{
               backgroundColor: "#007bff",
@@ -155,6 +150,7 @@ const ChatWidgetInner: React.FC = () => {
             </button>
           </div>
 
+          {/* Messages */}
           <div
             style={{
               flex: 1,
@@ -183,25 +179,15 @@ const ChatWidgetInner: React.FC = () => {
               </div>
             ))}
             {loading && (
-              <div
-                style={{
-                  alignSelf: "flex-start",
-                  fontStyle: "italic",
-                  color: textColor,
-                }}
-              >
+              <div style={{ alignSelf: "flex-start", fontStyle: "italic", color: textColor }}>
                 AI is typing...
               </div>
             )}
             <div ref={messagesEndRef} />
           </div>
 
-          <div
-            style={{
-              display: "flex",
-              borderTop: `1px solid ${isDark ? "#444" : "#ccc"}`,
-            }}
-          >
+          {/* Input */}
+          <div style={{ display: "flex", borderTop: `1px solid ${isDark ? "#444" : "#ccc"}` }}>
             <input
               ref={inputRef}
               type="text"
@@ -239,14 +225,6 @@ const ChatWidgetInner: React.FC = () => {
         </div>
       )}
     </div>
-  );
-};
-
-const ChatWidget: React.FC = () => {
-  return (
-    <BrowserOnly fallback={<div />}>
-      {() => <ChatWidgetInner />}
-    </BrowserOnly>
   );
 };
 
