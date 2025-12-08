@@ -35,22 +35,22 @@ const ChatWidgetInner: React.FC = () => {
     setMessages((prev) => [...prev, userMessage]);
     setInput("");
     setLoading(true);
+try {
+    // Backend URL using process.env for Docusaurus SSR compatibility
+    const backendUrl =
+      (typeof window !== "undefined" && process.env.VITE_BACKEND_URL) ||
+      "http://localhost:8000"; // fallback for local dev
 
-    try {
-      // Backend URL from Vercel env variable
-      const backendUrl =
-        (typeof window !== "undefined" && import.meta.env.VITE_BACKEND_URL) ||
-        "http://localhost:8000"; // fallback for local dev
+    const response = await fetch(`${backendUrl}/chat`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        query: trimmedInput,
+        software: "Python",
+        hardware: "NVIDIA Jetson",
+      }),
+    });
 
-      const response = await fetch(`${backendUrl}/chat`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          query: trimmedInput,
-          software: "Python",
-          hardware: "NVIDIA Jetson",
-        }),
-      });
 
       const data = await response.json();
       const aiText =
