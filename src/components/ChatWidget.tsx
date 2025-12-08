@@ -1,16 +1,16 @@
 import React, { useState, useRef, useEffect } from "react";
+import BrowserOnly from "@docusaurus/BrowserOnly";
 
 interface Message {
   sender: "user" | "ai";
   text: string;
 }
 
-const ChatWidget: React.FC = () => {
+const ChatWidgetInner: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState(false);
-  const [isDark, setIsDark] = useState(false);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -25,14 +25,6 @@ const ChatWidget: React.FC = () => {
     if (isOpen) inputRef.current?.focus();
   }, [isOpen]);
 
-  // Detect dark mode (client-side only)
-  useEffect(() => {
-    const dark =
-      window.matchMedia &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches;
-    setIsDark(dark);
-  }, []);
-
   const toggleChat = () => setIsOpen(!isOpen);
 
   const sendMessage = async () => {
@@ -45,18 +37,22 @@ const ChatWidget: React.FC = () => {
     setLoading(true);
 
     try {
-      const backendUrl = import.meta.env.VITE_BACKEND_URL;
+      const backendUrl = import.meta.env.VITE_BACKEND_URL; // Browser-safe env variable
 
-const response = await fetch(`${backendUrl}/chat`, {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ query: trimmedInput, software: "Python", hardware: "NVIDIA Jetson" }),
-});
+      const response = await fetch(`${backendUrl}/chat`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          query: trimmedInput,
+          software: "Python",
+          hardware: "NVIDIA Jetson",
+        }),
+      });
+
       const data = await response.json();
       console.log("Backend response:", data);
 
-      const aiText =
-        data?.answer || "Sorry, I could not get a response from backend.";
+      const aiText = data?.answer || "Sorry, I could not get a response from backend.";
       const aiMessage: Message = { sender: "ai", text: aiText };
       setMessages((prev) => [...prev, aiMessage]);
     } catch (error) {
@@ -74,6 +70,12 @@ const response = await fetch(`${backendUrl}/chat`, {
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") sendMessage();
   };
+
+  // Theme colors (client-only)
+  const isDark =
+    typeof window !== "undefined" &&
+    window.matchMedia &&
+    window.matchMedia("(prefers-color-scheme: dark)").matches;
 
   const bgColor = isDark ? "#1e1e1e" : "#fff";
   const userColor = isDark ? "#3a3a3a" : "#DCF8C6";
@@ -234,7 +236,16 @@ const response = await fetch(`${backendUrl}/chat`, {
   );
 };
 
+const ChatWidget: React.FC = () => {
+  return (
+    <BrowserOnly>
+      {() => <ChatWidgetInner />}
+    </BrowserOnly>
+  );
+};
+
 export default ChatWidget;
+
 
 
 
