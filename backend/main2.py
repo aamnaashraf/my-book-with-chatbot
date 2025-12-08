@@ -37,6 +37,7 @@ origins = [
     "http://localhost",
     "http://localhost:3000",
     "http://localhost:3000",
+    'https://my-book-with-chatbot-aamna.vercel.app/',
 ]
 
 app.add_middleware(
