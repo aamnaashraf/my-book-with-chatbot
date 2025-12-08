@@ -10,6 +10,7 @@ const ChatWidget: React.FC = () => {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState(false);
+  const [isDark, setIsDark] = useState(false);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -24,6 +25,14 @@ const ChatWidget: React.FC = () => {
     if (isOpen) inputRef.current?.focus();
   }, [isOpen]);
 
+  // Detect dark mode (client-side only)
+  useEffect(() => {
+    const dark =
+      window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches;
+    setIsDark(dark);
+  }, []);
+
   const toggleChat = () => setIsOpen(!isOpen);
 
   const sendMessage = async () => {
@@ -36,18 +45,23 @@ const ChatWidget: React.FC = () => {
     setLoading(true);
 
     try {
-     const backendUrl = process.env.REACT_APP_BACKEND_URL;
+      const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
-const response = await fetch(`${backendUrl}/chat`, {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ query: trimmedInput, software: "Python", hardware: "NVIDIA Jetson" }),
-});
+      const response = await fetch(`${backendUrl}/chat`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          query: trimmedInput,
+          software: "Python",
+          hardware: "NVIDIA Jetson",
+        }),
+      });
 
       const data = await response.json();
-      console.log("Backend response:", data); // Debug backend response
+      console.log("Backend response:", data);
 
-      const aiText = data?.answer || "Sorry, I could not get a response from backend.";
+      const aiText =
+        data?.answer || "Sorry, I could not get a response from backend.";
       const aiMessage: Message = { sender: "ai", text: aiText };
       setMessages((prev) => [...prev, aiMessage]);
     } catch (error) {
@@ -66,15 +80,21 @@ const response = await fetch(`${backendUrl}/chat`, {
     if (e.key === "Enter") sendMessage();
   };
 
-  // Determine theme colors
-  const isDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
   const bgColor = isDark ? "#1e1e1e" : "#fff";
   const userColor = isDark ? "#3a3a3a" : "#DCF8C6";
   const aiColor = isDark ? "#2c2c2c" : "#f1f0f0";
   const textColor = isDark ? "#f0f0f0" : "#000";
 
   return (
-    <div style={{ position: "fixed", bottom: "20px", right: "20px", zIndex: 1000, fontFamily: "Arial, sans-serif" }}>
+    <div
+      style={{
+        position: "fixed",
+        bottom: "20px",
+        right: "20px",
+        zIndex: 1000,
+        fontFamily: "Arial, sans-serif",
+      }}
+    >
       {!isOpen && (
         <button
           onClick={toggleChat}
@@ -168,7 +188,9 @@ const response = await fetch(`${backendUrl}/chat`, {
               </div>
             ))}
             {loading && (
-              <div style={{ alignSelf: "flex-start", fontStyle: "italic", color: textColor }}>
+              <div
+                style={{ alignSelf: "flex-start", fontStyle: "italic", color: textColor }}
+              >
                 AI is typing...
               </div>
             )}
