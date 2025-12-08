@@ -37,7 +37,10 @@ const ChatWidgetInner: React.FC = () => {
     setLoading(true);
 
     try {
-      const backendUrl = import.meta.env.VITE_BACKEND_URL; // Browser-safe env variable
+      // Backend URL from Vercel env variable
+      const backendUrl =
+        (typeof window !== "undefined" && import.meta.env.VITE_BACKEND_URL) ||
+        "http://localhost:8000"; // fallback for local dev
 
       const response = await fetch(`${backendUrl}/chat`, {
         method: "POST",
@@ -50,9 +53,8 @@ const ChatWidgetInner: React.FC = () => {
       });
 
       const data = await response.json();
-      console.log("Backend response:", data);
-
-      const aiText = data?.answer || "Sorry, I could not get a response from backend.";
+      const aiText =
+        data?.answer || "Sorry, I could not get a response from backend.";
       const aiMessage: Message = { sender: "ai", text: aiText };
       setMessages((prev) => [...prev, aiMessage]);
     } catch (error) {
@@ -71,7 +73,7 @@ const ChatWidgetInner: React.FC = () => {
     if (e.key === "Enter") sendMessage();
   };
 
-  // Theme colors (client-only)
+  // Theme colors (client-side only)
   const isDark =
     typeof window !== "undefined" &&
     window.matchMedia &&
@@ -236,15 +238,17 @@ const ChatWidgetInner: React.FC = () => {
   );
 };
 
+// Wrap ChatWidget in BrowserOnly for Docusaurus SSG compatibility
 const ChatWidget: React.FC = () => {
   return (
-    <BrowserOnly>
+    <BrowserOnly fallback={<div />}>
       {() => <ChatWidgetInner />}
     </BrowserOnly>
   );
 };
 
 export default ChatWidget;
+
 
 
 
