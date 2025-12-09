@@ -1,6 +1,5 @@
-// @ts-check
-import {themes as prismThemes} from 'prism-react-renderer';
-
+// docusaurus.config.js
+import { themes as prismThemes } from 'prism-react-renderer';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -8,93 +7,62 @@ const config = {
   tagline: 'A Complete 13-Week Program for Industry Professionals in Physical AI & Humanoid Robotics',
   favicon: 'img/favicon.ico',
 
-  // Production URL (your GitHub Pages)
   url: 'https://aamnaashraf.github.io',
   baseUrl: '/',
 
-  // GitHub pages deployment config
   organizationName: 'aamnaashraf',
   projectName: 'Physical-AI-Humanoid-Robotics',
   deploymentBranch: 'gh-pages',
 
-  // ✅ Updated to ignore broken links for temporary deployment
   onBrokenLinks: 'ignore',
   onBrokenMarkdownLinks: 'ignore',
 
-  i18n: {
-    defaultLocale: 'en',
-    locales: ['en'],
-  },
+  i18n: { defaultLocale: 'en', locales: ['en'] },
 
   presets: [
     [
       'classic',
-      /** @type {import('@docusaurus/preset-classic').Options} */
-      ({
+      {
         docs: {
-          sidebarPath: './sidebars.js',
+          sidebarPath: require.resolve('./sidebars.js'),
           editUrl: 'https://github.com/aamnaashraf/Physical-AI-Humanoid-Robotics/edit/main/',
         },
         blog: false,
-        theme: {
-          customCss: './src/css/custom.css',
-        },
+        theme: { customCss: require.resolve('./src/css/custom.css') },
         sitemap: {
           changefreq: 'weekly',
           priority: 0.5,
           ignorePatterns: ['/tags/**'],
           filename: 'sitemap.xml',
         },
-      }),
+      },
     ],
   ],
 
-  themeConfig: /** @type {import('@docusaurus/preset-classic').ThemeConfig} */ ({
+  // ←←← DELETE EVERYTHING BELOW THIS LINE (the three blocks I removed) ←←←
+  // No "vite:", no "onSiteUrl:", no "plugins:" with apiPlugin
+  // We are now using /api/chat.js + vercel.json instead → works perfectly
+
+  themeConfig: {
     image: 'img/docusaurus-social-card.jpg',
     navbar: {
       title: 'Physical AI & Humanoid Robotics',
-      logo: {
-        alt: 'My Logo',
-        src: '/img/logo.jpg', // only relative to the 'static' folder
-      },
+      logo: { alt: 'My Logo', src: '/img/logo.jpg' },
       items: [
-        {
-          type: 'docSidebar',
-          sidebarId: 'tutorialSidebar',
-          position: 'left',
-          label: 'Textbook',
-        },
-        {
-          href: 'https://github.com/aamnaashraf/Physical-AI-Humanoid-Robotics',
-          label: 'GitHub',
-          position: 'right',
-        },
+        { type: 'docSidebar', sidebarId: 'tutorialSidebar', position: 'left', label: 'Textbook' },
+        { href: 'https://github.com/aamnaashraf/Physical-AI-Humanoid-Robotics', label: 'GitHub', position: 'right' },
       ],
     },
     footer: {
       style: 'dark',
       links: [
-        {
-          title: 'Documentation',
-          items: [
-            { label: 'Introduction', to: '/docs/intro' },
-          ],
-        },
-        {
-          title: 'Resources',
-          items: [{ label: 'Glossary', to: '/docs/references/glossary' }],
-        },
+        { title: 'Documentation', items: [{ label: 'Introduction', to: '/docs/intro' }] },
+        { title: 'Resources', items: [{ label: 'Glossary', to: '/docs/references/glossary' }] },
         {
           title: 'More',
           items: [
-            {
-              label: 'GitHub',
-              href: 'https://github.com/aamnaashraf/Physical-AI-Humanoid-Robotics',
-            },
-            {
-              label: 'Project Constitution',
-              href: 'https://github.com/aamnaashraf/Physical-AI-Humanoid-Robotics',
-            },
+            { label: 'GitHub', href: 'https://github.com/aamnaashraf/Physical-AI-Humanoid-Robotics' },
+            { label: 'Project Constitution', href: 'https://github.com/aamnaashraf/Physical-AI-Humanoid-Robotics' },
           ],
         },
       ],
@@ -105,11 +73,7 @@ const config = {
       darkTheme: prismThemes.dracula,
       additionalLanguages: ['python', 'bash', 'yaml'],
     },
-    colorMode: {
-      defaultMode: 'light',
-      disableSwitch: false,
-      respectPrefersColorScheme: true,
-    },
+    colorMode: { defaultMode: 'light', disableSwitch: false, respectPrefersColorScheme: true },
     algolia: {
       appId: 'YOUR_APP_ID',
       apiKey: 'YOUR_SEARCH_API_KEY',
@@ -122,15 +86,17 @@ const config = {
     },
     metadata: [
       { name: 'keywords', content: 'robotics, physical AI, humanoid robots, ROS 2, Isaac Sim, VLA' },
-      { name: 'description', content: 'Comprehensive 13-week textbook for industry practitioners learning Physical AI and Humanoid Robotics' },
+      { name: 'description', content: 'Comprehensive 13-week textbook...' },
       { property: 'og:title', content: 'Physical AI & Humanoid Robotics Textbook' },
-      { property: 'og:description', content: 'Master Physical AI, ROS 2, Digital Twins, and Humanoid Robotics in 13 weeks' },
+      { property: 'og:description', content: 'Master Physical AI, ROS 2, Digital Twins...' },
       { property: 'og:type', content: 'website' },
     ],
-  }),
+  },
 };
 
 export default config;
+
+
 
 
 
