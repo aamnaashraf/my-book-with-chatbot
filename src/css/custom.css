@@ -15,7 +15,7 @@
   --ifm-hero-background: #49a792; /* light mode hero background */
 }
 [data-theme='dark']:root {
-  --ifm-hero-background: #187460; /* dark mode hero background */
+  --ifm-hero-background: #49a7939d; /* dark mode hero background */
 }
 [data-theme='dark'] {
   background: linear-gradient(90deg, #00d4ff55, #5572677c); /* deep teal, vibrant but dark */
