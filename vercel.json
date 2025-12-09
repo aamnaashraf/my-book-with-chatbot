@@ -1,24 +1,13 @@
 {
   "buildCommand": "npm run build",
   "outputDirectory": "build",
-  "framework": "docusaurus",
+  "framework": null, 
   "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
     {
       "source": "/api/chat",
       "destination": "/api/chat.js"
-    },
-    {
-      "source": "/api/chat/",
-      "destination": "/api/chat.js"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/build/$1",
-      "continue": true
     }
   ]
 }
