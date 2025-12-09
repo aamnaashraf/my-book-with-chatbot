@@ -35,13 +35,12 @@ const config = {
           ignorePatterns: ['/tags/**'],
           filename: 'sitemap.xml',
         },
+        // YE 2 LINES ADD KI HAIN — 404 KA PERMANENT ILAJ
+        trailingSlash: false,
+        cleanUrls: true,
       },
     ],
   ],
-
-  // ←←← DELETE EVERYTHING BELOW THIS LINE (the three blocks I removed) ←←←
-  // No "vite:", no "onSiteUrl:", no "plugins:" with apiPlugin
-  // We are now using /api/chat.js + vercel.json instead → works perfectly
 
   themeConfig: {
     image: 'img/docusaurus-social-card.jpg',
