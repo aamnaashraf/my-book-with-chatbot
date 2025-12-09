@@ -1,4 +1,3 @@
-// docusaurus.config.js
 import { themes as prismThemes } from 'prism-react-renderer';
 
 /** @type {import('@docusaurus/types').Config} */
@@ -35,11 +34,10 @@ const config = {
           ignorePatterns: ['/tags/**'],
           filename: 'sitemap.xml',
         },
-      
       },
     ],
   ],
-   
+
   themeConfig: {
     image: 'img/docusaurus-social-card.jpg',
     navbar: {
@@ -92,6 +90,7 @@ const config = {
 };
 
 export default config;
+
 
 
 
