@@ -16,21 +16,85 @@ export default function Home(): JSX.Element {
 
   return (
     <Layout
-      title={`${siteConfig.title}`}
-      description="Comprehensive 13-week textbook for industry practitioners learning Physical AI and Humanoid Robotics">
-      <header className={clsx('hero hero--primary')}>
-        <div className="container">
-          <h1 className="hero__title">{siteConfig.title}</h1>
-          <p className="hero__subtitle">{siteConfig.tagline}</p>
-          <div>
-            <Link
-              className="button button--secondary button--lg"
-              to="/docs/intro">
-              Start Reading →
-            </Link>
-          </div>
-        </div>
-      </header>
+  title={siteConfig.title}
+  description="Comprehensive 13-week textbook for industry practitioners learning Physical AI and Humanoid Robotics"
+>
+  <header className="hero hero--primary" style={{ padding: '60px 20px' }}>
+  <div
+    className="container"
+    style={{
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      flexWrap: 'wrap', // allows stacking on small screens
+      gap: '20px',
+    }}
+  >
+    {/* Left side: text */}
+    <div style={{ flex: '1 1 300px', minWidth: '250px' }}>
+      <h1 className="hero__title">{siteConfig.title}</h1>
+      <p className="hero__subtitle">{siteConfig.tagline}</p>
+      <Link
+        className="button button--secondary button--lg"
+        to="/docs/intro"
+        style={{ marginTop: '20px', display: 'inline-block' }}
+      >
+        Start Reading →
+      </Link>
+    </div>
+
+   {/* Right side: image (no box, no shadow) */}
+<div
+  style={{
+    flex: '1 1 250px',
+    minWidth: '200px',
+    textAlign: 'center',
+    background: 'transparent', // ensure wrapper has no background
+    padding: 0,                // remove padding that can look like a box
+  }}
+>
+  <img
+    src="/img/liftapp.png"
+    alt="AI Book Cover"
+    style={{
+      width: '100%',          // responsive
+      maxWidth: '400px',      // limit on large screens
+      height: 'auto',
+      borderRadius: 0,        // remove rounded corners if you want flush edges
+      objectFit: 'cover',
+      transition: 'transform 0.45s ease, filter 0.45s ease',
+      boxShadow: 'none',      // REMOVE any shadow (no box look)
+      border: 'none',         // remove borders
+      display: 'inline-block',
+      animation: 'float 1s ease-in-out infinite',
+      background: 'transparent' // make sure image background is transparent at CSS level
+    }}
+  />
+  <style>
+    {`
+      @keyframes float {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-8px); } /* subtle float */
+        100% { transform: translateY(0px); }
+      }
+
+      /* hover effect: subtle lift but no box */
+      img:hover {
+        transform: translateY(-6px) scale(1.03);
+        filter: drop-shadow(0 12px 24px rgba(0,0,0,0.08)); /* very light shadow just for depth */
+      }
+
+      /* On very small screens reduce float and scale to avoid overflow */
+      @media (max-width: 480px) {
+        img { animation: none; transform: none; }
+        img:hover { transform: none; filter: none; }
+      }
+    `}
+  </style>
+</div>
+
+  </div>
+</header>
 
       {/* ====== NEW: Highlights section (3 points) - placed right below the header ====== */}
       <section className="container highlights-section" aria-label="Why this book">
