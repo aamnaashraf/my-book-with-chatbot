@@ -1,22 +1,24 @@
 {
-  "builds": [
+  "buildCommand": "npm run build",
+  "outputDirectory": "build",
+  "framework": "docusaurus",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
     {
-      "src": "build/**",
-      "use": "@vercel/static"
+      "source": "/api/chat",
+      "destination": "/api/chat.js"
     },
     {
-      "src": "api/chat.js",
-      "use": "@vercel/node"
+      "source": "/api/chat/",
+      "destination": "/api/chat.js"
     }
   ],
   "routes": [
     {
-      "src": "/api/(.*)",
-      "dest": "/api/$1"
-    },
-    {
       "src": "/(.*)",
-      "dest": "/build/$1"
+      "dest": "/build/$1",
+      "continue": true
     }
   ]
 }
