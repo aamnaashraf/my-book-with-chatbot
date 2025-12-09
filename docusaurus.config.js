@@ -35,12 +35,13 @@ const config = {
           ignorePatterns: ['/tags/**'],
           filename: 'sitemap.xml',
         },
-        // YE 2 LINES ADD KI HAIN — 404 KA PERMANENT ILAJ
-        trailingSlash: false,
-        cleanUrls: true,
+      
       },
     ],
   ],
+   // YE 2 LINES ADD KI HAIN — 404 KA PERMANENT ILAJ
+        trailingSlash: false,
+        cleanUrls: true,
 
   themeConfig: {
     image: 'img/docusaurus-social-card.jpg',
